@@ -1,7 +1,7 @@
 /** *****************************************************************
     twoButtons.java   servlet example
 
-        @author Jeff Offutt
+        @author John DeCarlo
 ********************************************************************* */
 
 // Import Java Libraries
@@ -11,6 +11,12 @@ import java.util.*;
 //Import Servlet Libraries
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet(
+        name = "MyServlet",
+        urlPatterns = {"/hello"}
+)
 
 // twoButtons class
 // CONSTRUCTOR: no constructor specified (default)
