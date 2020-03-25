@@ -13,7 +13,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet( name = "servletName", urlPatterns = {"/servicePathName"} )
+@WebServlet( name = "twoButtons", urlPatterns = {"/servlet"} )
 
 // twoButtons class
 // CONSTRUCTOR: no constructor specified (default)
