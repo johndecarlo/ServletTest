@@ -34,7 +34,7 @@ public class swe432 extends HttpServlet {
 		out.println("");
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
-		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"http://mason.gmu.edu/~jdecarl/swe432.css\">");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"http://mason.gmu.edu/~jdecarl/swe432.css \">");
 		out.println("</head>");
 		out.println("");
 	}
@@ -47,9 +47,9 @@ public class swe432 extends HttpServlet {
 		out.println("<br>");
 		out.println("<table class=\"gym_images\">");
 		out.println("<tr>");
-		out.println("<td><img src=\"http://mason.gmu.edu/~jdecarl/images/AFC.jpg\" alt=\"Mason Recreation Athletic Complex\" align=\"center\" style=\"width:300px;height:200px;\">");
-		out.println("<td><img src=\"http://mason.gmu.edu/~jdecarl/images/RAC.jpg\" alt=\"Mason Aquatic Fitness Center\" style=\"width:300;height:200px;\">");
-		out.println("<td><img src=\"http://mason.gmu.edu/~jdecarl/images/Skyline.jpg\" alt=\"Mason Skyline Fitness Center\" style=\"width:300px;height:200px;\"></br>");
+		out.println("<td><img src=\"http://mason.gmu.edu/~jdecarl/images/AFC.jpg \" alt=\"Mason Recreation Athletic Complex\" align=\"center\" style=\"width:300px;height:200px;\">");
+		out.println("<td><img src=\"http://mason.gmu.edu/~jdecarl/images/RAC.jpg \" alt=\"Mason Aquatic Fitness Center\" style=\"width:300;height:200px;\">");
+		out.println("<td><img src=\"http://mason.gmu.edu/~jdecarl/images/Skyline.jpg \" alt=\"Mason Skyline Fitness Center\" style=\"width:300px;height:200px;\"></br>");
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td><p class=\"gym_name\"><a href=\"https://recreation.gmu.edu/facilities/aquatic-and-fitness-center/\" target=\"_blank\">Recreation Athletic Complex (RAC)</a></p>");
