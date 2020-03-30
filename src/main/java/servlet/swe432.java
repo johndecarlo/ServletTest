@@ -19,7 +19,7 @@ public class swe432 extends HttpServlet {
 	static String RAC_image = "http://mason.gmu.edu/~jdecarl/images/RAC.jpg";
 	static String Skyline_image = "http://mason.gmu.edu/~jdecarl/images/Skyline.jpg";
 	
-	static String style = "http://mason.gmu.edu/~jdecarl/swe432.css";
+	static String Style = "http://mason.gmu.edu/~jdecarl/swe432.css";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -40,7 +40,7 @@ public class swe432 extends HttpServlet {
 		out.println("");
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
-		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"" + style + "\">");
+		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"" + Style + "\">");
 		out.println("</head>");
 		out.println("");
 	}
