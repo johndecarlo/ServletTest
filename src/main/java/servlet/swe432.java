@@ -13,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 
 @WebServlet( name = "assignment", urlPatterns = {"/assignment"} )
 
+static String Submit_Review = "Submit Review";
+
 public class swe432 extends HttpServlet {
 	
 	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
