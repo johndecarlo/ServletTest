@@ -15,20 +15,25 @@ import javax.servlet.annotation.WebServlet;
 
 public class swe432 extends HttpServlet {
 	
-	String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
+	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String result = request.getParameter("Result");
+		String time = request.getParameter("time");
+		String review_final = "Time:" + time;
+		
+		//Basic operations post method
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		PrintHead(out);
-		PrintBody(out);
+		PrintBody(out, review_final);
 	}
 	
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
 	    PrintHead(out);
-	    PrintBody(out);
+	    PrintBody(out, "");
 	}
 	
 	private void PrintHead (PrintWriter out) {
@@ -41,7 +46,7 @@ public class swe432 extends HttpServlet {
 		out.println("");
 	}
 	
-	private void PrintBody (PrintWriter out) {
+	private void PrintBody (PrintWriter out, String Review_input) {
 		out.println("<body>");
 		out.println("<h1>George Mason University Gyms Feedback");
 		out.println("<p class=\"intro\">Tell us about your experience with Mason Recreation facilities and what we can improve.</p>");
@@ -147,7 +152,8 @@ public class swe432 extends HttpServlet {
 		out.println("</td>");
 		out.println("</tr>");
 		out.println("</table>");
-		out.println("<p><input type=\"button\" value=\"Submit Review\" name=\"B1\" onClick=\"checkOptions(form)\"></p>");
+		out.println("<p><input type=\"button\" value=\"" + Submit_Review + "\" name=\"Result\" onClick=\"checkOptions(form)\"></p>");
+		out.println("<p>" + Review_input + "</p>");
 		out.println("</body>");
 		out.println("");
 		out.println("</html>");
