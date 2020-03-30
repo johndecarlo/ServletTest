@@ -34,7 +34,7 @@ public class swe432 extends HttpServlet {
 		out.println("");
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
-		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"http://mason.gmu.edu/~jdecarl/swe432.css \">");
+		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"" + "http://mason.gmu.edu/~jdecarl/swe432.css" + "\">");
 		out.println("</head>");
 		out.println("");
 	}
