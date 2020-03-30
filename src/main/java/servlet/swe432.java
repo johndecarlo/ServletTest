@@ -15,8 +15,6 @@ import javax.servlet.annotation.WebServlet;
 
 public class swe432 extends HttpServlet {
 	
-	static String Style ="https://swe432-servlet-test.herokuapp.com/swe432.css";
-	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -36,7 +34,7 @@ public class swe432 extends HttpServlet {
 		out.println("");
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
-		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"swe432.css\">");
+		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"src/main/css/swe432.css\">");
 		out.println("</head>");
 		out.println("");
 	}
@@ -49,9 +47,9 @@ public class swe432 extends HttpServlet {
 		out.println("<br>");
 		out.println("<table class=\"gym_images\">");
 		out.println("<tr>");
-		out.println("<td><img src=\"/images/RAC.jpg\" alt=\"Mason Recreation Athletic Complex\" align=\"center\" style=\"width:300px;height:200px;\">");
-		out.println("<td><img src=\"/images/AFC.jpg\" alt=\"Mason Aquatic Fitness Center\" style=\"width:300;height:200px;\">");
-		out.println("<td><img src=\"/images/Skyline.jpg\" alt=\"Mason Skyline Fitness Center\" style=\"width:300px;height:200px;\"></br>");
+		out.println("<td><img src=\"images/RAC.jpg\" alt=\"Mason Recreation Athletic Complex\" align=\"center\" style=\"width:300px;height:200px;\">");
+		out.println("<td><img src=\"images/AFC.jpg\" alt=\"Mason Aquatic Fitness Center\" style=\"width:300;height:200px;\">");
+		out.println("<td><img src=\"images/Skyline.jpg\" alt=\"Mason Skyline Fitness Center\" style=\"width:300px;height:200px;\"></br>");
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td><p class=\"gym_name\"><a href=\"https://recreation.gmu.edu/facilities/aquatic-and-fitness-center/\" target=\"_blank\">Recreation Athletic Complex (RAC)</a></p>");
