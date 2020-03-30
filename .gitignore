@@ -5,4 +5,3 @@ tomcat.5000
 # IntelliJ Idea project files
 .idea
 *.iml
-Procfile
