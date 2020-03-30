@@ -14,10 +14,6 @@ import javax.servlet.annotation.WebServlet;
 @WebServlet( name = "assignment", urlPatterns = {"/assignment"} )
 
 public class swe432 extends HttpServlet {
-
-	static String AFC_link = "https://recreation.gmu.edu/facilities/aquatic-and-fitness-center/";
-	static String RAC_link = "https://recreation.gmu.edu/facilities/rac/";
-	static String skyline_link = "https://recreation.gmu.edu/facilities/skyline-fitness/";
 	
 	static String Style ="https://swe432-servlet-test.herokuapp.com/swe432.css";
 	
@@ -58,9 +54,9 @@ public class swe432 extends HttpServlet {
 		out.println("<td><img src=\"/images/Skyline.jpg\" alt=\"Mason Skyline Fitness Center\" style=\"width:300px;height:200px;\"></br>");
 		out.println("</tr>");
 		out.println("<tr>");
-		out.println("<td><p class=\"gym_name\"><a href=AFC_link target=\"_blank\">Recreation Athletic Complex (RAC)</a></p>");
-		out.println("<td><p class=\"gym_name\"><a href=RAC_link target=\"_blank\">Aquatic Fitness Center (AFC)</a></p>");
-		out.println("<td><p class=\"gym_name\"><a href=skyline_link target=\"_blank\">Skyline Fitness Center</a></p>");
+		out.println("<td><p class=\"gym_name\"><a href=\"https://recreation.gmu.edu/facilities/aquatic-and-fitness-center/\" target=\"_blank\">Recreation Athletic Complex (RAC)</a></p>");
+		out.println("<td><p class=\"gym_name\"><a href=\"https://recreation.gmu.edu/facilities/rac/\" target=\"_blank\">Aquatic Fitness Center (AFC)</a></p>");
+		out.println("<td><p class=\"gym_name\"><a href=\"https://recreation.gmu.edu/facilities/skyline-fitness/\" target=\"_blank\">Skyline Fitness Center</a></p>");
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
