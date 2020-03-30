@@ -19,7 +19,7 @@ public class swe432 extends HttpServlet {
 	static String RAC_image = "http://mason.gmu.edu/~jdecarl/images/RAC.jpg";
 	static String Skyline_image = "http://mason.gmu.edu/~jdecarl/images/Skyline.jpg";
 	
-	static String style = "http://mason.gmu.edu/~jdecarl/swe432.css"
+	static String style = "http://mason.gmu.edu/~jdecarl/swe432.css";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
