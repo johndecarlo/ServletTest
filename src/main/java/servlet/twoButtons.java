@@ -44,7 +44,7 @@ static String OperationSub = "Subtract";
 static String OperationMult = "Multiply";
 
 // Other strings.
-static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
+static String Style ="http://mason.gmu.edu/~jdecarl/swe432.css";
 
 /** *****************************************************
  *  Overrides HttpServlet's doPost().
