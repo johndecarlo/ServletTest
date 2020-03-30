@@ -46,7 +46,7 @@ public class swe432 extends HttpServlet {
 	private void PrintBody (PrintWriter out) {
 		out.println("<body>");
 		out.println("<h1>George Mason University Gyms Feedback");
-		out.println("<p class="intro">Tell us about your experience with Mason Recreation facilities and what we can improve.</p>");
+		out.println("<p class=\"intro\">Tell us about your experience with Mason Recreation facilities and what we can improve.</p>");
 		out.println("</h1>");
 		out.println("<br>");
 		out.println("<table class=\"gym_images\">");
