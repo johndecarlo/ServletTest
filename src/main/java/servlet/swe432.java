@@ -19,6 +19,8 @@ public class swe432 extends HttpServlet {
 	static String RAC_link = "https://recreation.gmu.edu/facilities/rac/";
 	static String skyline_link = "https://recreation.gmu.edu/facilities/skyline-fitness/";
 	
+	static String Style ="https://swe432-servlet-test.herokuapp.com/swe432.css";
+	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -38,6 +40,7 @@ public class swe432 extends HttpServlet {
 		out.println("");
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
+		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"" + Style + "\">");
 		out.println("</head>");
 		out.println("");
 	}
