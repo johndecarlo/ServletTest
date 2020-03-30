@@ -31,7 +31,6 @@ public class swe432 extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    PrintHead(out);
 	    PrintBody(out);
-	    PrintTail(out);
 	}
 	
 	private void PrintHead (PrintWriter out) {
