@@ -15,15 +15,20 @@ import javax.servlet.annotation.WebServlet;
 
 public class swe432 extends HttpServlet {
 	
-	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
+	static String Style = "http://mason.gmu.edu/~jdecarl/swe432.css";
 	static String jscript = "http://mason.gmu.edu/~jdecarl/swe432.js";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String gym = request.getParameter("gym");
+		String experience = request.getParameter("rating");
+		String final_result = "Thank you for telling us about your " + experience + " experience at " + gym;
+		
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		PrintHead(out);
 		out.println("<body>");
 		out.println("<p style=\"text-align:center\">Your review has been submitted</p>");
+		out.println("<p style=\"text-align:center\">" + final_result + "</p>");
 		out.println("<body>");
 		out.println("</html>");
 	}
@@ -41,7 +46,7 @@ public class swe432 extends HttpServlet {
 		out.println("");
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
-		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + css_style + "\">");
+		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"" + Style + "\">");
 		out.println("<script src=\"" + jscript + "\"></script>");
 		out.println("</head>");
 		out.println("");
@@ -71,9 +76,9 @@ public class swe432 extends HttpServlet {
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
 		out.println("<p><b><u>Gym Attended:</u></b></p>");
-		out.println("<label for=\"afc\"><input type=\"radio\" name=\"gym\" id=\"afc\" value=\"afc\" />A.F.C.</label></br>");
-		out.println("<label for=\"rac\"><input type=\"radio\" name=\"gym\" id=\"rac\" value=\"rac\" />R.A.C.</label></br>");
-		out.println("<label for=\"skyline\"><input type=\"radio\" name=\"gym\" id=\"skyline\" value=\"skyline\" />Skyline</label>");
+		out.println("<label for=\"afc\"><input type=\"radio\" name=\"gym\" id=\"afc\" value=\"the AFC\" />A.F.C.</label></br>");
+		out.println("<label for=\"rac\"><input type=\"radio\" name=\"gym\" id=\"rac\" value=\"the RAC\" />R.A.C.</label></br>");
+		out.println("<label for=\"skyline\"><input type=\"radio\" name=\"gym\" id=\"skyline\" value=\"Skyline\" />Skyline</label>");
 		out.println("</td>");
 		out.println("<td class=\"exercise_type\">");
 		out.println("<p><b><u>Exercise Type (select all that apply):</u></b></p>");
