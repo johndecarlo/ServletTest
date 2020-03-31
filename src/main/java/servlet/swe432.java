@@ -67,7 +67,7 @@ public class swe432 extends HttpServlet {
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
 	    PrintHead(out);
-	    PrintBody(out, "");
+	    PrintBody(out, "Hello");
 	}
 	
 	private void PrintHead (PrintWriter out) {
