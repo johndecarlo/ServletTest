@@ -1,7 +1,7 @@
 body {background-color:#009900;}
 h1 {background-color:#FFEF33;color:#000000; font-family: Verdana, sans-serif;font-size: 200%;line-height: 1.5;margin: auto;text-align: center;width: 1000px;min-width: 750px;}
 p.intro {color:#000000;font-size: 50%;line-height: 1.5;width: 500px;margin: auto;}
-p.result{color:#FFFFFF;font-size: 100%;text-align: center;}
+p.result{color:#FFFFFF;font-size: 150%;text-align: center;}
 p.gym_name {background-color:#FFEF33;font-family: Verdana, sans-serif;font-size: 85%;font-weight: bold;height: 20;padding: 5px;text-align: center;}
 table.experience {background-color:#009900;font-size: 100%;font-family: Verdana, sans-serif;height: 75;width: 500;min-width: 500;text-align: center;margin: auto;}
 table.gym_images {background-color:#009900;height: 200;width: 900;margin: auto;}
