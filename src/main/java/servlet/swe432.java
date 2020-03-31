@@ -11,24 +11,19 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet( name = "assignment", urlPatterns = {"/assignment"} )
+@WebServlet( name = "swe432-assignment-6", urlPatterns = {"/swe432-assignment-6"} )
 
 public class swe432 extends HttpServlet {
 	
-	// Location of servlet.
-	static String Domain  = "cs.gmu.edu:8443";
-	static String Path    = "/offutt/servlet/";
-	static String Servlet = "twoButtons";
-	static String Submit_Review = "Submit Review";
-	
 	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
+	static Ztring jscript = "";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		PrintHead(out);
 		out.println("<body>");
-		out.println("<p>Your review has been submitted</p>");
+		out.println("<p style=\"text-align:center\">Your review has been submitted</p>");
 		out.println("<body>");
 		out.println("</html>");
 	}
@@ -47,6 +42,7 @@ public class swe432 extends HttpServlet {
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + css_style + "\">");
+		out.println("<script src=\"" + jscript + "\"></script>");
 		out.println("</head>");
 		out.println("");
 	}

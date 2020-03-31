@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
   <script>
-    var servletURL = window.location.origin + "/assignment";
+    var servletURL = window.location.origin + "/swe432-assignment-6";
   </script>
 <title>First JSP</title>
 </head>
