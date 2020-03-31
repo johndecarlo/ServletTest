@@ -61,6 +61,7 @@ public class swe432 extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		PrintHead(out);
 		PrintBody(out, review_final);
+		PrintTail(out);
 	}
 	
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,6 +69,7 @@ public class swe432 extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    PrintHead(out);
 	    PrintBody(out, "Hello");
+		PrintTail(out);
 	}
 	
 	private void PrintHead (PrintWriter out) {
@@ -186,7 +188,11 @@ public class swe432 extends HttpServlet {
 		out.println("<p><input type=\"button\" value=\"" + Submit_Review + "\" name=\"Result\" onClick=\"checkOptions(form)\"></p>");
 		out.println("<br><p>" + Review_input + "</p>");
 		out.println("</body>");
-		out.println("");
-		out.println("</html>");
 	}
+	
+	private void PrintTail (PrintWriter out)
+	{
+	   out.println("");
+	   out.println("</html>");
+	} // End PrintTail
 }
