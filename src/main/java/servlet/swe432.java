@@ -20,6 +20,7 @@ public class swe432 extends HttpServlet {
 	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
 		String result = request.getParameter("Result");
 		String workouts = "";
 		//Include the gym 
@@ -58,10 +59,18 @@ public class swe432 extends HttpServlet {
 		//Basic operations post method
 		String review_final = "Gym attended: " + workouts + ", Type of Exercise: " + workouts + ", Overall experience: " + rating;
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		PrintHead(out);
 		PrintBody(out, review_final);
 		PrintTail(out);
+		*/
+		
+		PrintWriter out = response.getWriter();
+		out.println("<html>");
+		PrintHead(out);
+		out.println("<body>");
+		out.println("<p>Your review has been submitted</p>");
+		out.println("<body>");
+		out.println("</html>");
 	}
 	
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -101,6 +110,7 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
+		out.println("<form method=post>");
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
@@ -129,49 +139,6 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</td>");
-		/*
-		out.println("<td class=\"gym_time\">");
-		out.println("<p><b><u>Time Attended:</u></b></p>");
-		out.println("<select name=\"time\">");
-		out.println("<option value=\"6:00AM\" selected=\"selected\">6:00 AM</option>");
-		out.println("<option value=\"6:30AM\">6:30 AM</option>");
-		out.println("<option value=\"7:00AM\">7:00 AM</option>");
-		out.println("<option value=\"7:30AM\">7:30 AM</option>");
-		out.println("<option value=\"8:00AM\">8:00 AM</option>");
-		out.println("<option value=\"8:30AM\">8:30 AM</option>");
-		out.println("<option value=\"9:00AM\">9:00 AM</option>");
-		out.println("<option value=\"9:30AM\">9:30 AM</option>");
-		out.println("<option value=\"10:00AM\">10:00 AM</option>");
-		out.println("<option value=\"10:30AM\">10:30 AM</option>");
-		out.println("<option value=\"11:00AM\">11:00 AM</option>");
-		out.println("<option value=\"11:30AM\">11:30 AM</option>");
-		out.println("<option value=\"12:00PM\">12:00 PM</option>");
-		out.println("<option value=\"12:30PM\">12:30 PM</option>");
-		out.println("<option value=\"1:00PM\">1:00 PM</option>");
-		out.println("<option value=\"1:30PM\">1:30 PM</option>");
-		out.println("<option value=\"2:00PM\">2:00 PM</option>");
-		out.println("<option value=\"2:30PM\">2:30 PM</option>");
-		out.println("<option value=\"3:00PM\">3:00 PM</option>");
-		out.println("<option value=\"3:30PM\">3:30 PM</option>");
-		out.println("<option value=\"4:00PM\">4:00 PM</option>");
-		out.println("<option value=\"4:30PM\">4:30 PM</option>");
-		out.println("<option value=\"5:00PM\">5:00 PM</option>");
-		out.println("<option value=\"5:30PM\">5:30 PM</option>");
-		out.println("<option value=\"6:00PM\">6:00 PM</option>");
-		out.println("<option value=\"6:30PM\">6:30 PM</option>");
-		out.println("<option value=\"7:00PM\">7:00 PM</option>");
-		out.println("<option value=\"7:30PM\">7:30 PM</option>");
-		out.println("<option value=\"8:00PM\">8:00 PM</option>");
-		out.println("<option value=\"8:30PM\">8:30 PM</option>");
-		out.println("<option value=\"9:00PM\">9:00 PM</option>");
-		out.println("<option value=\"9:30PM\">9:30 PM</option>");
-		out.println("<option value=\"10:00PM\">10:00 PM</option>");
-		out.println("<option value=\"10:30PM\">10:30 PM</option>");
-		out.println("<option value=\"11:00PM\">11:00 PM</option>");
-		out.println("<option value=\"11:30PM\">11:30 PM</option>");
-		out.println("</select>");
-		out.println("</td>");
-		*/
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
@@ -185,8 +152,9 @@ public class swe432 extends HttpServlet {
 		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"rating\" id=\"very_good\" value=\"very_good\" />Very good</label>");
 		out.println("<tr/>");
 		out.println("</table>");
-		out.println("<p><input type=\"button\" value=\"" + Submit_Review + "\" name=\"Result\" onClick=\"checkOptions(form)\"></p>");
-		out.println("<br><p>" + Review_input + "</p>");
+		out.println("</form>");
+		//out.println("<p><input type=\"button\" value=\"" + Submit_Review + "\" name=\"Result\" onClick=\"checkOptions(form)\"></p>");
+		out.println(Review_input);
 		out.println("</body>");
 	}
 	
