@@ -16,7 +16,7 @@ import javax.servlet.annotation.WebServlet;
 public class swe432 extends HttpServlet {
 	
 	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
-	static Ztring jscript = "";
+	static String jscript = "http://mason.gmu.edu/~jdecarl/swe432.js";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
