@@ -20,50 +20,6 @@ public class swe432 extends HttpServlet {
 	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		String result = request.getParameter("Result");
-		String workouts = "";
-		//Include the gym 
-		String gym_attended = request.getParameter("gym");
-		String rating = request.getParameter("rating");
-		
-		//Include all the workouts performed
-		String cardio = request.getParameter("cardio");
-		if((cardio != null))
-			workouts += cardio;
-		String chest = request.getParameter("chest");
-		if((chest != null))
-			workouts += chest;
-		String back = request.getParameter("back");
-		if((back != null))
-			workouts += back;
-		String arms = request.getParameter("arms");
-		if((arms != null))
-			workouts += arms;
-		String legs = request.getParameter("legs");
-		if((legs != null))
-			workouts += legs;
-		String core = request.getParameter("core");
-		if((core != null))
-			workouts += core;
-		String basketball = request.getParameter("basketball");
-		if((basketball != null))
-			workouts += basketball;
-		String swimming = request.getParameter("swimming");
-		if((swimming != null))
-			workouts += swimming;
-		String other = request.getParameter("other");
-		if((other != null))
-			workouts += other;
-		
-		//Basic operations post method
-		String review_final = "Gym attended: " + workouts + ", Type of Exercise: " + workouts + ", Overall experience: " + rating;
-		response.setContentType("text/html");
-		PrintHead(out);
-		PrintBody(out, review_final);
-		PrintTail(out);
-		*/
-		
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		PrintHead(out);
