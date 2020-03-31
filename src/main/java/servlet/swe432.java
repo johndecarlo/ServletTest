@@ -22,9 +22,44 @@ public class swe432 extends HttpServlet {
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String result = request.getParameter("Result");
 		String time = request.getParameter("time");
-		String review_final = "Time:" + time;
+		String workouts = "";
+		//Include the gym 
+		String gym_attended = "";
+		
+		//Include all the workouts performed
+		String cardio = request.getParameter("cardio");
+		if((cardio != null)
+			workouts += cardio;
+		String chest = request.getParameter("chest");
+		if((chest != null)
+			workouts += chest;
+		String back = request.getParameter("back");
+		if((back != null)
+			workouts += back;
+		String arms = request.getParameter("arms");
+		if((arms != null)
+			workouts += arms;
+		String legs = request.getParameter("legs");
+		if((legs != null)
+			workouts += legs;
+		String core = request.getParameter("core");
+		if((core != null)
+			workouts += core;
+		String basketball = request.getParameter("basketball");
+		if((basketball != null)
+			workouts += basketball;
+		String swimming = request.getParameter("swimming");
+		if((swimming != null)
+			workouts += swimming;
+		String other = request.getParameter("other");
+		if((other != null)
+			workouts += other;
+		
+		//Include the overall workout experience
+		String experience = "";
 		
 		//Basic operations post method
+		String review_final = "Gym attended: " + workouts + ", Overall experience: " + experience;
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		PrintHead(out);
@@ -86,7 +121,7 @@ public class swe432 extends HttpServlet {
 		out.println("<tr>");
 		out.println("<td>Arms<input type=\"checkbox\" name=\"arms\" value=\"arms\"/>");
 		out.println("<td>Legs<input type=\"checkbox\" name=\"legs\" value=\"legs\"/>");
-		out.println("<td>Legs<input type=\"checkbox\" name=\"legs\" value=\"legs\"/>");
+		out.println("<td>Legs<input type=\"checkbox\" name=\"core\" value=\"core\"/>");
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td>Basketball<input type=\"checkbox\" name=\"basketball\" value=\"basketball\"/>");
@@ -150,7 +185,6 @@ public class swe432 extends HttpServlet {
 		out.println("<tr/>");
 		out.println("<tr>");
 		out.println("<td bgcolor=\"#FFEF33\"><p align=\"center\" style=\"font-size:90%;\"><b>Describe your experience at this gym?:");
-		out.println("<form align=\"center\"><textarea rows=\"6\" cols=\"45\">Insert text in here</textarea></form>");
 		out.println("</td>");
 		out.println("</tr>");
 		out.println("</table>");
