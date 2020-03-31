@@ -15,6 +15,10 @@ import javax.servlet.annotation.WebServlet;
 
 public class swe432 extends HttpServlet {
 	
+	// Location of servlet.
+	static String Domain  = "cs.gmu.edu:8443";
+	static String Path    = "/offutt/servlet/";
+	static String Servlet = "twoButtons";
 	static String Submit_Review = "Submit Review";
 	
 	static String css_style = "http://mason.gmu.edu/~jdecarl/swe432.css";
@@ -67,7 +71,7 @@ public class swe432 extends HttpServlet {
 		out.println("</table>");
 		out.println("<br>");
 		out.print  ("<form method=\"post\"");
-	    out.println(" action=\"https://" + "https://swe432-servlet-test.herokuapp.com/assignment" + "\">");
+		out.println(" action=\"https://" + Domain + Path + Servlet + "\">");
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
