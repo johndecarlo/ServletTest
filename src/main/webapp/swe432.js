@@ -25,8 +25,8 @@ function checkOptions (form) {
 		alert ("Please select a gym.");
 	else if(!checkExercise(form))
 		alert ("Please select at least one exercise you did.");
-	else if(!checkRatintg(form))
+	else if(!checkRating(form))
 		alert ("Please select a rating.");
 	else
-		document.theForm.submit();
+		document.getElementById("theForm").submit();
 }
