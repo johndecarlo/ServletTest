@@ -20,12 +20,12 @@ function checkExercise (form) {
 	return true;
 }
 		
-function submitForm (form) {
-	if(checkGym(form))
+function checkOptions (form) {
+	if(!checkGym(form))
 		alert ("Please select a gym.");
-	else if(checkExercise(form))
+	else if(!checkExercise(form))
 		alert ("Please select at least one exercise you did.");
-	else if(checkRatintg(form))
+	else if(!checkRatintg(form))
 		alert ("Please select a rating.");
 	else
 		document.theForm.submit();
