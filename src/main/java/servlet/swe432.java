@@ -21,10 +21,10 @@ public class swe432 extends HttpServlet {
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String result = request.getParameter("Result");
-		String time = request.getParameter("time");
 		String workouts = "";
 		//Include the gym 
-		String gym_attended = "";
+		String gym_attended = request.getParameter("gym");
+		String rating = request.getParameter("rating");
 		
 		//Include all the workouts performed
 		String cardio = request.getParameter("cardio");
@@ -55,11 +55,8 @@ public class swe432 extends HttpServlet {
 		if((other != null))
 			workouts += other;
 		
-		//Include the overall workout experience
-		String experience = "";
-		
 		//Basic operations post method
-		String review_final = "Gym attended: " + workouts + ", Overall experience: " + experience;
+		String review_final = "Gym attended: " + workouts + ", Type of Exercise: " + workouts + ", Overall experience: " + rating;
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		PrintHead(out);
@@ -130,6 +127,7 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</td>");
+		/*
 		out.println("<td class=\"gym_time\">");
 		out.println("<p><b><u>Time Attended:</u></b></p>");
 		out.println("<select name=\"time\">");
@@ -171,6 +169,7 @@ public class swe432 extends HttpServlet {
 		out.println("<option value=\"11:30PM\">11:30 PM</option>");
 		out.println("</select>");
 		out.println("</td>");
+		*/
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
@@ -183,10 +182,6 @@ public class swe432 extends HttpServlet {
 		out.println("<label for=\"good\"><input type=\"radio\" name=\"rating\" id=\"good\" value=\"good\" />Good</label>");
 		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"rating\" id=\"very_good\" value=\"very_good\" />Very good</label>");
 		out.println("<tr/>");
-		out.println("<tr>");
-		out.println("<td bgcolor=\"#FFEF33\"><p align=\"center\" style=\"font-size:90%;\"><b>Describe your experience at this gym?:");
-		out.println("</td>");
-		out.println("</tr>");
 		out.println("</table>");
 		out.println("<p><input type=\"button\" value=\"" + Submit_Review + "\" name=\"Result\" onClick=\"checkOptions(form)\"></p>");
 		out.println("<br><p>" + Review_input + "</p>");
