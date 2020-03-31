@@ -189,7 +189,7 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<p><input type=\"button\" value=\"" + Submit_Review + "\" name=\"Result\" onClick=\"checkOptions(form)\"></p>");
-		out.println("<p>" + Review_input + "</p>");
+		out.println("<br><p>" + Review_input + "</p>");
 		out.println("</body>");
 		out.println("");
 		out.println("</html>");
