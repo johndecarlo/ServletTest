@@ -70,8 +70,7 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
-		out.print  ("<form method=\"post\"");
-		out.println(" action=\"https://" + Domain + Path + Servlet + "\">");
+		out.println("<form method=\"post\">");
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
@@ -113,7 +112,7 @@ public class swe432 extends HttpServlet {
 		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"rating\" id=\"very_good\" value=\"very_good\" />Very good</label>");
 		out.println("<tr/>");
 		out.println("</table>");
-		out.println("<p><input type=\"button\" value=\"" + Submit_Review + "\" name=\"Result\" onClick=\"checkOptions(form)\"></p>");
+		out.println("<p><input type=\"submit\" value=\"Submit\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
 		out.println("</body>");
 	}
