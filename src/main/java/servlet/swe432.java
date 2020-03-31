@@ -27,8 +27,8 @@ public class swe432 extends HttpServlet {
 		out.println("<html>");
 		PrintHead(out);
 		out.println("<body>");
-		out.println("<p style=\"text-align:center\">Your review has been submitted</p>");
-		out.println("<p style=\"text-align:center\">" + final_result + "</p>");
+		out.println("<p class=\"result\">Your review has been submitted</p>");
+		out.println("<p class=\"result\">" + final_result + "</p>");
 		out.println("<body>");
 		out.println("</html>");
 	}
