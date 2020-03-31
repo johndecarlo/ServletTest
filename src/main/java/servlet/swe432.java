@@ -15,8 +15,8 @@ import javax.servlet.annotation.WebServlet;
 
 public class swe432 extends HttpServlet {
 	
-	static String Style = "http://mason.gmu.edu/~jdecarl/swe432.css";
-	static String jscript = "http://mason.gmu.edu/~jdecarl/swe432.js";
+	static String Style = "swe432.css";
+	static String jscript = "swe432.js";
 	
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String gym = request.getParameter("gym");
