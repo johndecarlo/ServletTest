@@ -110,7 +110,8 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
-		out.println("<form method=post>");
+		out.print  ("<form method=\"post\"");
+	    out.println(" action=\"https://" + "https://swe432-servlet-test.herokuapp.com/assignment" + "\">");
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
