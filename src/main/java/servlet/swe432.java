@@ -28,31 +28,31 @@ public class swe432 extends HttpServlet {
 		
 		//Include all the workouts performed
 		String cardio = request.getParameter("cardio");
-		if((cardio != null)
+		if((cardio != null))
 			workouts += cardio;
 		String chest = request.getParameter("chest");
-		if((chest != null)
+		if((chest != null))
 			workouts += chest;
 		String back = request.getParameter("back");
-		if((back != null)
+		if((back != null))
 			workouts += back;
 		String arms = request.getParameter("arms");
-		if((arms != null)
+		if((arms != null))
 			workouts += arms;
 		String legs = request.getParameter("legs");
-		if((legs != null)
+		if((legs != null))
 			workouts += legs;
 		String core = request.getParameter("core");
-		if((core != null)
+		if((core != null))
 			workouts += core;
 		String basketball = request.getParameter("basketball");
-		if((basketball != null)
+		if((basketball != null))
 			workouts += basketball;
 		String swimming = request.getParameter("swimming");
-		if((swimming != null)
+		if((swimming != null))
 			workouts += swimming;
 		String other = request.getParameter("other");
-		if((other != null)
+		if((other != null))
 			workouts += other;
 		
 		//Include the overall workout experience
