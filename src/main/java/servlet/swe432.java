@@ -71,7 +71,7 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
-		out.println("<form method=\"post\">");
+		out.println("<form method=\"post\"> name =\"theForm\"");
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
