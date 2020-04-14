@@ -81,6 +81,8 @@ public class persistenceFile extends HttpServlet{
                       error+= "<li>Weight must be an integer less than 150.</li>";
                       weight = "";
                   }
+                }
+              }
             }
           }catch (Exception e) {
             error+= "<li>Age or weight must be an integer greater than 0.</li>";
