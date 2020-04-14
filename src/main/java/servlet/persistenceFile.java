@@ -19,15 +19,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet(name = "FilePersistence", urlPatterns = {"/file"})
+@WebServlet(name = "FilePersistence", urlPatterns = {"/FilePersistence"})
 public class persistenceFile extends HttpServlet{
-  static enum Data {AGE, NAME};
+  static enum Data {AGE, NAME, WEIGHT};
   static String RESOURCE_FILE = "entries.txt";
   static final String VALUE_SEPARATOR = ";";
 
   static String Domain  = "";
   static String Path    = "/";
-  static String Servlet = "file";
+  static String Servlet = "FilePersistence";
 
   // Button labels
   static String OperationAdd = "Add";
@@ -46,19 +46,25 @@ public class persistenceFile extends HttpServlet{
   {
      String name = request.getParameter(Data.NAME.name());
      String age = request.getParameter(Data.AGE.name());
+     String weight = request.getParameter(Data.WEIGHT.name());
 
      String error = "";
      if(name == null){
        error= "<li>Name is required</li>";
        name = "";
      }
-
      if(age == null){
        error+= "<li>Age is required.<li>";
        age = "";
-     }else{
+     }
+     if(weight == null){
+       error+= "<li>Weight is required.<li>";
+       weight = "";
+     }
+     else{
           try{
             Integer ageInteger =new Integer(age);
+            Integer weightInteger =new Integer(weight);
             if(ageInteger<1){
                 error+= "<li>Age must be an integer greater than 0.</li>";
                 age = "";
@@ -66,10 +72,18 @@ public class persistenceFile extends HttpServlet{
               if(ageInteger>150){
                   error+= "<li>Age must be an integer less than 150.</li>";
                   age = "";
-              }
+              }else{
+                if(weightInteger<0){
+                    error+= "<li>Weight must be an integer greater than 0.</li>";
+                    weight = "";
+                }else{
+                  if(weightInteger>150){
+                      error+= "<li>Weight must be an integer less than 150.</li>";
+                      weight = "";
+                  }
             }
           }catch (Exception e) {
-            error+= "<li>Age must be an integer greater than 0.</li>";
+            error+= "<li>Age or weight must be an integer greater than 0.</li>";
             age = "";
           }
      }
@@ -79,7 +93,7 @@ public class persistenceFile extends HttpServlet{
 
      if (error.length() == 0){
        PrintWriter entriesPrintWriter = new PrintWriter(new FileWriter(RESOURCE_FILE, true), true);
-       entriesPrintWriter.println(name+VALUE_SEPARATOR+age);
+       entriesPrintWriter.println(name+VALUE_SEPARATOR+age+VALUE_SEPARATOR+weight);
        entriesPrintWriter.close();
 
        PrintHead(out);
@@ -87,7 +101,7 @@ public class persistenceFile extends HttpServlet{
        PrintTail(out);
      }else{
        PrintHead(out);
-       PrintBody(out, name, age, error);
+       PrintBody(out, name, age, weight, error);
        PrintTail(out);
      }
   }
@@ -102,7 +116,7 @@ public class persistenceFile extends HttpServlet{
      response.setContentType("text/html");
      PrintWriter out = response.getWriter();
      PrintHead(out);
-     PrintBody(out, "", "", "");
+     PrintBody(out, "", "", "", "");
      PrintTail(out);
   }
 
@@ -127,7 +141,7 @@ public class persistenceFile extends HttpServlet{
   /** *****************************************************
    *  Prints the <BODY> of the HTML page
   ********************************************************* */
-  private void PrintBody (PrintWriter out, String name, String age, String error){
+  private void PrintBody (PrintWriter out, String name, String age, String weight, String error){
      out.println("<body onLoad=\"setFocus()\">");
      out.println("<p>");
      out.println("A simple example that demonstrates how to persist data to a file");
@@ -155,6 +169,12 @@ public class persistenceFile extends HttpServlet{
       +"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""
       +age+"\" size=3 required></td>");
      out.println("  </tr>");
+     out.println("  <tr>");
+     out.println("   <td>Weight:</td>");
+     out.println("   <td><input type=\"text\"  name=\""+Data.WEIGHT.name()
+      +"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""
+      +weight+"\" size=3 required></td>");
+     out.println("  </tr>");
      out.println(" </table>");
      out.println(" <br>");
      out.println(" <br>");
@@ -181,6 +201,7 @@ public class persistenceFile extends HttpServlet{
         out.println("  <tr>");
         out.println("   <th>Name</th>");
         out.println("   <th>Age</th>");
+        out.println("   <th>Weight</th>");
         out.println("  </tr>");
         File file = new File(resourcePath);
         if(!file.exists()){
