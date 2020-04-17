@@ -45,6 +45,189 @@ public class swe432 extends HttpServlet {
 	static String Style = "swe432.css";
 	static String jscript = "swe432.js";
 
+	static enum Data {NAME, AGE, ENTRY, ENTRIES};
+
+  static String RESOURCE_FILE = "entries.xml";
+
+  static String Domain  = "";
+  static String Path    = "/";
+  static String Servlet = "xml";
+
+  // Button labels
+  static String OperationAdd = "Add";
+
+  public class Entry {
+    String name;
+    Integer age;
+  }
+
+  List<Entry> entries;
+
+  public class EntryManager {
+    private String filePath = null;
+    private XMLEventFactory eventFactory = null;
+    private XMLEvent LINE_END = null;
+    private XMLEvent LINE_TAB = null;
+    private XMLEvent ENTRIES_START = null;
+    private XMLEvent ENTRIES_END = null;
+    private XMLEvent ENTRY_START = null;
+    private XMLEvent ENTRY_END = null;
+
+
+    public EntryManager(){
+      eventFactory = XMLEventFactory.newInstance();
+      LINE_END = eventFactory.createDTD("\n");
+      LINE_TAB = eventFactory.createDTD("\t");
+
+      ENTRIES_START = eventFactory.createStartElement(
+        "","", Data.ENTRIES.name());
+      ENTRIES_END =eventFactory.createEndElement(
+        "", "", Data.ENTRIES.name());
+      ENTRY_START = eventFactory.createStartElement(
+        "","", Data.ENTRY.name());
+      ENTRY_END =eventFactory.createEndElement(
+        "", "", Data.ENTRY.name());
+    }
+    public void setFilePath(String filePath) {
+      this.filePath = filePath;
+    }
+
+    public List<Entry> save(String name, Integer age)
+      throws FileNotFoundException, XMLStreamException{
+      List<Entry> entries = getAll();
+      Entry newEntry = new Entry();
+      newEntry.name = name;
+      newEntry.age = age;
+      entries.add(newEntry);
+
+      XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+      XMLEventWriter eventWriter = outputFactory
+              .createXMLEventWriter(new FileOutputStream(filePath));
+
+      eventWriter.add(eventFactory.createStartDocument());
+      eventWriter.add(LINE_END);
+
+      eventWriter.add(ENTRIES_START);
+      eventWriter.add(LINE_END);
+
+      for(Entry entry: entries){
+        addEntry(eventWriter, entry.name, entry.age);
+      }
+
+      eventWriter.add(ENTRIES_END);
+      eventWriter.add(LINE_END);
+
+      eventWriter.add(eventFactory.createEndDocument());
+      eventWriter.close();
+      return entries;
+    }
+
+    private void addEntry(XMLEventWriter eventWriter, String name,
+            Integer age) throws XMLStreamException {
+        eventWriter.add(ENTRY_START);
+        eventWriter.add(LINE_END);
+        createNode(eventWriter, Data.NAME.name(), name);
+        createNode(eventWriter, Data.AGE.name(), String.valueOf(age));
+        eventWriter.add(ENTRY_END);
+        eventWriter.add(LINE_END);
+
+    }
+
+    private void createNode(XMLEventWriter eventWriter, String name,
+          String value) throws XMLStreamException {
+      StartElement sElement = eventFactory.createStartElement("", "", name);
+      eventWriter.add(LINE_TAB);
+      eventWriter.add(sElement);
+
+      Characters characters = eventFactory.createCharacters(value);
+      eventWriter.add(characters);
+
+      EndElement eElement = eventFactory.createEndElement("", "", name);
+      eventWriter.add(eElement);
+      eventWriter.add(LINE_END);
+
+    }
+
+    private List<Entry> getAll(){
+      List entries = new ArrayList();
+
+      try{
+
+        File file = new File(filePath);
+        if(!file.exists()){
+          return entries;
+        }
+
+        XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+        InputStream in = new FileInputStream(file);
+        XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+
+        Entry entry = null;
+        while (eventReader.hasNext()) {
+          // <ENTRIES> not needed for the example
+          XMLEvent event = eventReader.nextEvent();
+
+          if (event.isStartElement()) {
+              StartElement startElement = event.asStartElement();
+              if (startElement.getName().getLocalPart()
+                .equals(Data.ENTRY.name())) {
+                  entry = new Entry();
+              }
+
+              if (event.isStartElement()) {
+                  if (event.asStartElement().getName().getLocalPart()
+                          .equals(Data.NAME.name())) {
+                      event = eventReader.nextEvent();
+                      entry.name =event.asCharacters().getData();
+                      continue;
+                  }
+              }
+              if (event.asStartElement().getName().getLocalPart()
+                      .equals(Data.AGE.name())) {
+                  event = eventReader.nextEvent();
+                  entry.age =Integer.parseInt(event.asCharacters().getData());
+                  continue;
+              }
+          }
+
+          if (event.isEndElement()) {
+              EndElement endElement = event.asEndElement();
+              if (endElement.getName().getLocalPart()
+              .equals(Data.ENTRY.name())) {
+                  entries.add(entry);
+              }
+          }
+
+        }
+
+      }catch (FileNotFoundException e) {
+        e.printStackTrace();
+      }catch (XMLStreamException e) {
+        e.printStackTrace();
+      }catch(IOException ioException){
+        ioException.printStackTrace();
+      }
+
+      return entries;
+    }
+
+  public String getAllAsHTMLTable(List<Entry> entries){
+    StringBuilder htmlOut = new StringBuilder("<table>");
+    htmlOut.append("<tr><th>Name</th><th>Age</th></tr>");
+    if(entries == null || entries.size() == 0){
+      htmlOut.append("<tr><td>No entries yet.</td></tr>");
+    }else{
+      for(Entry entry: entries){
+         htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td></tr>");
+      }
+    }
+    htmlOut.append("</table>");
+    return htmlOut.toString();
+  }
+
+
+}
+
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String gym = request.getParameter("gym");
 		String experience = request.getParameter("rating");
