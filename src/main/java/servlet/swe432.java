@@ -1,28 +1,55 @@
+package servlet;
 /*
-swe432_Assignment6.java		
+swe432_Assignment6.java
 */
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-// Import Java Libraries
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
-//Import Servlet Libraries
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.annotation.WebServlet;
+
+import javax.xml.stream.XMLEventFactory;
+import javax.xml.stream.XMLEventWriter;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartDocument;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 @WebServlet( name = "swe432-assignment-6", urlPatterns = {"/swe432-assignment-6"} )
 
 public class swe432 extends HttpServlet {
-	
+
 	static String Style = "swe432.css";
 	static String jscript = "swe432.js";
-	
+
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String gym = request.getParameter("gym");
 		String experience = request.getParameter("rating");
 		String final_result = "Thank you for telling us about your " + experience + " experience at " + gym;
-		
+
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		PrintHead(out);
@@ -32,7 +59,7 @@ public class swe432 extends HttpServlet {
 		out.println("<body>");
 		out.println("</html>");
 	}
-	
+
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
@@ -40,7 +67,7 @@ public class swe432 extends HttpServlet {
 	    PrintBody(out, "Hello");
 		PrintTail(out);
 	}
-	
+
 	private void PrintHead (PrintWriter out) {
 		out.println("<html>");
 		out.println("");
@@ -51,7 +78,7 @@ public class swe432 extends HttpServlet {
 		out.println("</head>");
 		out.println("");
 	}
-	
+
 	private void PrintBody (PrintWriter out, String Review_input) {
 		out.println("<body>");
 		out.println("<h1>George Mason University Gyms Feedback");
@@ -117,7 +144,7 @@ public class swe432 extends HttpServlet {
 		out.println("</form>");
 		out.println("</body>");
 	}
-	
+
 	private void PrintTail (PrintWriter out)
 	{
 	   out.println("");
