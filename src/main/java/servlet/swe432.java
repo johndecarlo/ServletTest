@@ -111,7 +111,7 @@ public class swe432 extends HttpServlet {
       eventWriter.add(LINE_END);
 
       for(Entry entry: entries) {
-        addEntry(eventWriter, entry.name, entry.age, entry.gym);
+        addEntry(eventWriter, entry.name, entry.age, entry.gym, entry.experience);
       }
 
       eventWriter.add(ENTRIES_END);
