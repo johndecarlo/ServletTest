@@ -14,6 +14,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
        throws ServletException, IOException
 {
    // Get session object
+   String action = request.getParameter("action");
    HttpSession session = request.getSession();
 
    String name   = request.getParameter("attrib_name");
