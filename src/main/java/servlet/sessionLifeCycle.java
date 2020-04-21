@@ -14,7 +14,6 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
        throws ServletException, IOException
 {
    String action = request.getParameter("action");
-   String lifeCycleURL = "/sessionLifeCycle";
 
    if (action != null && action.equals("invalidate"))
    {  // Called from the invalidate button, kill the session.
@@ -36,6 +35,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
       // Create a link so the user can create a new session.
       // The link will have a parameter builtin
+      String lifeCycleURL = "/offutt/servlet/sessionLifeCycle";
       out.println("<a href=\"" + lifeCycleURL + "?action=newSession\">");
       out.println("Create new session</A>");
 
@@ -83,6 +83,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
       out.print  ("<br>Maximum inactive interval (seconds): ");
       out.println(session.getMaxInactiveInterval());
 
+      String lifeCycleURL = "/offutt/servlet/sessionLifeCycle";
       out.print  ("<br><br><a href=\"" + lifeCycleURL + "?action=invalidate\">");
       out.println("Invalidate the session</a>");
       out.print  ("<br><a href=\"" + lifeCycleURL + "\">");
