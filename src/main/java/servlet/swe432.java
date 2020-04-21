@@ -45,7 +45,7 @@ public class swe432 extends HttpServlet {
 	static String Style = "swe432.css";
 	static String jscript = "swe432.js";
 
-	static enum Data {NAME, AGE, ENTRY, ENTRIES};
+	static enum Data {NAME, AGE, GYM, EXPERIENCE, WORKOUT, ENTRY, ENTRIES};
 
   static String RESOURCE_FILE = "entries.xml";
 
@@ -53,12 +53,12 @@ public class swe432 extends HttpServlet {
   static String Path    = "/";
   static String Servlet = "xml";
 
-  // Button labels
-  static String OperationAdd = "Add";
-
   public class Entry {
     String name;
     Integer age;
+		String gym;
+		String experience;
+		List<String> workout;
   }
 
   List<Entry> entries;
@@ -93,11 +93,12 @@ public class swe432 extends HttpServlet {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age) throws FileNotFoundException, XMLStreamException {
+    public List<Entry> save(String name, Integer age, String gym) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
       newEntry.age = age;
+			newEntry.gym = gym;
       entries.add(newEntry);
 
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -110,7 +111,7 @@ public class swe432 extends HttpServlet {
       eventWriter.add(LINE_END);
 
       for(Entry entry: entries) {
-        addEntry(eventWriter, entry.name, entry.age);
+        addEntry(eventWriter, entry.name, entry.age, entry.gym);
       }
 
       eventWriter.add(ENTRIES_END);
@@ -126,6 +127,7 @@ public class swe432 extends HttpServlet {
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
         createNode(eventWriter, Data.AGE.name(), String.valueOf(age));
+				createNode(eventWriter, Data.GYM.name(), gym);
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
     }
@@ -176,6 +178,13 @@ public class swe432 extends HttpServlet {
                   event = eventReader.nextEvent();
                   entry.age =Integer.parseInt(event.asCharacters().getData());
                   continue;
+              }
+							if (event.isStartElement()) {
+                  if (event.asStartElement().getName().getLocalPart().equals(Data.GYM.name())) {
+                      event = eventReader.nextEvent();
+                      entry.gym =event.asCharacters().getData();
+                      continue;
+                  }
               }
           }
           if (event.isEndElement()) {
@@ -268,14 +277,32 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("<br>");
-		out.println("<form method=\"post\" id=\"theForm\">");
+		out.print("<form name=\"persist2file\" method=\"post\"");
+		out.println(" action=\""+Domain+Path+Servlet+"\">");
+		if(error != null && error.length() > 0){
+			out.println(
+			"<p style=\"color:red;\">Please correct the following and resubmit.</p>"
+				);
+			out.println("<ol>");
+			out.println(error);
+			out.println("</ol>");
+		}
+		out.println("<table class = \"user_input\">")
+		out.println("<tr>");
+		out.println("<td>Name:</td>");
+		out.println("<td><input type=\"text\" name=\""+Data.NAME.name()+"\" value=\""+name+"\" size=30 required></td>");
+		out.println("</tr>");
+		out.println("<tr>");
+		out.println("<td>Age:</td>");
+		out.println("<td><input type=\"text\"  name=\""+Data.AGE.name()+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""+age+"\" size=3 required></td>");
+		out.println("</table>")
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
 		out.println("<p><b><u>Gym Attended:</u></b></p>");
-		out.println("<label for=\"afc\"><input type=\"radio\" name=\"gym\" id=\"afc\" value=\"the AFC\" />A.F.C.</label></br>");
-		out.println("<label for=\"rac\"><input type=\"radio\" name=\"gym\" id=\"rac\" value=\"the RAC\" />R.A.C.</label></br>");
-		out.println("<label for=\"skyline\"><input type=\"radio\" name=\"gym\" id=\"skyline\" value=\"Skyline\" />Skyline</label>");
+		out.println("<label for=\"afc\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"afc\" value=\"the AFC\" />A.F.C.</label></br>");
+		out.println("<label for=\"rac\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"rac\" value=\"the RAC\" />R.A.C.</label></br>");
+		out.println("<label for=\"skyline\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"skyline\" value=\"Skyline\" />Skyline</label>");
 		out.println("</td>");
 		out.println("<td class=\"exercise_type\">");
 		out.println("<p><b><u>Exercise Type (select all that apply):</u></b></p>");
@@ -310,42 +337,9 @@ public class swe432 extends HttpServlet {
 		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"rating\" id=\"very_good\" value=\"very_good\" />Very good</label>");
 		out.println("<tr/>");
 		out.println("</table>");
+		out.println(" <input type=\"button\" value=\"Submit\" onClick=\"checkOptions(form)\">");
 		out.println("<p style=\"text-align:center\"><input type=\"button\" value=\"Submit\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
-		out.println("<p>");
-		out.println("A simple example that demonstrates how to persist data to a XML file");
-		out.println("</p>");
-		if(error != null && error.length() > 0){
-			out.println(
-			"<p style=\"color:red;\">Please correct the following and resubmit.</p>"
-				);
-			out.println("<ol>");
-			out.println(error);
-			out.println("</ol>");
-		}
-		out.print  ("<form name=\"persist2file\" method=\"post\"");
-		out.println(" action=\""+Domain+Path+Servlet+"\">");
-		out.println("");
-		out.println(" <table>");
-		out.println("  <tr>");
-		out.println("   <td>Name:</td>");
-		out.println("   <td><input type=\"text\" name=\""+Data.NAME.name()
-		+"\" value=\""+name+"\" size=30 required></td>");
-		out.println("  </tr>");
-		out.println("  <tr>");
-		out.println("   <td>Age:</td>");
-		out.println("   <td><input type=\"text\"  name=\""+Data.AGE.name()
-		+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""
-		+age+"\" size=3 required></td>");
-		out.println("  </tr>");
-		out.println(" </table>");
-		out.println(" <br>");
-		out.println(" <br>");
-		out.println(" <input type=\"submit\" value=\"" + OperationAdd
-		+ "\" name=\"Operation\">");
-		out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
-		out.println("</form>");
-		out.println("");
 		out.println("</body>");
 	}
 
