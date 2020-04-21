@@ -88,12 +88,12 @@ public class swe432 extends HttpServlet {
       ENTRY_END =eventFactory.createEndElement(
         "", "", Data.ENTRY.name());
     }
+
     public void setFilePath(String filePath) {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age)
-      throws FileNotFoundException, XMLStreamException{
+    public List<Entry> save(String name, Integer age) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
@@ -101,8 +101,7 @@ public class swe432 extends HttpServlet {
       entries.add(newEntry);
 
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-      XMLEventWriter eventWriter = outputFactory
-              .createXMLEventWriter(new FileOutputStream(filePath));
+      XMLEventWriter eventWriter = outputFactory.createXMLEventWriter(new FileOutputStream(filePath));
 
       eventWriter.add(eventFactory.createStartDocument());
       eventWriter.add(LINE_END);
@@ -110,7 +109,7 @@ public class swe432 extends HttpServlet {
       eventWriter.add(ENTRIES_START);
       eventWriter.add(LINE_END);
 
-      for(Entry entry: entries){
+      for(Entry entry: entries) {
         addEntry(eventWriter, entry.name, entry.age);
       }
 
@@ -122,19 +121,16 @@ public class swe432 extends HttpServlet {
       return entries;
     }
 
-    private void addEntry(XMLEventWriter eventWriter, String name,
-            Integer age) throws XMLStreamException {
+    private void addEntry(XMLEventWriter eventWriter, String name, Integer age) throws XMLStreamException {
         eventWriter.add(ENTRY_START);
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
         createNode(eventWriter, Data.AGE.name(), String.valueOf(age));
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
-
     }
 
-    private void createNode(XMLEventWriter eventWriter, String name,
-          String value) throws XMLStreamException {
+    private void createNode(XMLEventWriter eventWriter, String name, String value) throws XMLStreamException {
       StartElement sElement = eventFactory.createStartElement("", "", name);
       eventWriter.add(LINE_TAB);
       eventWriter.add(sElement);
@@ -145,16 +141,13 @@ public class swe432 extends HttpServlet {
       EndElement eElement = eventFactory.createEndElement("", "", name);
       eventWriter.add(eElement);
       eventWriter.add(LINE_END);
-
     }
 
-    private List<Entry> getAll(){
+    private List<Entry> getAll() {
       List entries = new ArrayList();
-
-      try{
-
+      try {
         File file = new File(filePath);
-        if(!file.exists()){
+        if(!file.exists()) {
           return entries;
         }
 
@@ -169,64 +162,55 @@ public class swe432 extends HttpServlet {
 
           if (event.isStartElement()) {
               StartElement startElement = event.asStartElement();
-              if (startElement.getName().getLocalPart()
-                .equals(Data.ENTRY.name())) {
+              if (startElement.getName().getLocalPart().equals(Data.ENTRY.name())) {
                   entry = new Entry();
               }
-
               if (event.isStartElement()) {
-                  if (event.asStartElement().getName().getLocalPart()
-                          .equals(Data.NAME.name())) {
+                  if (event.asStartElement().getName().getLocalPart().equals(Data.NAME.name())) {
                       event = eventReader.nextEvent();
                       entry.name =event.asCharacters().getData();
                       continue;
                   }
               }
-              if (event.asStartElement().getName().getLocalPart()
-                      .equals(Data.AGE.name())) {
+              if (event.asStartElement().getName().getLocalPart().equals(Data.AGE.name())) {
                   event = eventReader.nextEvent();
                   entry.age =Integer.parseInt(event.asCharacters().getData());
                   continue;
               }
           }
-
           if (event.isEndElement()) {
               EndElement endElement = event.asEndElement();
-              if (endElement.getName().getLocalPart()
-              .equals(Data.ENTRY.name())) {
+              if (endElement.getName().getLocalPart().equals(Data.ENTRY.name())) {
                   entries.add(entry);
               }
           }
 
         }
 
-      }catch (FileNotFoundException e) {
+      } catch (FileNotFoundException e) {
         e.printStackTrace();
-      }catch (XMLStreamException e) {
+      } catch (XMLStreamException e) {
         e.printStackTrace();
-      }catch(IOException ioException){
+      } catch(IOException ioException){
         ioException.printStackTrace();
       }
-
       return entries;
     }
 
-  public String getAllAsHTMLTable(List<Entry> entries){
-    StringBuilder htmlOut = new StringBuilder("<table>");
-    htmlOut.append("<tr><th>Name</th><th>Age</th></tr>");
-    if(entries == null || entries.size() == 0){
-      htmlOut.append("<tr><td>No entries yet.</td></tr>");
-    }else{
-      for(Entry entry: entries){
-         htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td></tr>");
-      }
-    }
-    htmlOut.append("</table>");
-    return htmlOut.toString();
-  }
-
-
-}
+  	public String getAllAsHTMLTable(List<Entry> entries){
+    	StringBuilder htmlOut = new StringBuilder("<table>");
+    	htmlOut.append("<tr><th>Name</th><th>Age</th></tr>");
+    	if(entries == null || entries.size() == 0){
+      	htmlOut.append("<tr><td>No entries yet.</td></tr>");
+    	} else {
+      	for(Entry entry: entries){
+         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td></tr>");
+      	}
+    	}
+    	htmlOut.append("</table>");
+    	return htmlOut.toString();
+  	}
+	}
 
 	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String gym = request.getParameter("gym");
@@ -247,7 +231,7 @@ public class swe432 extends HttpServlet {
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
 	    PrintHead(out);
-	    PrintBody(out, "Hello");
+	    PrintBody(out, "Hello", "", "", "");
 		PrintTail(out);
 	}
 
@@ -257,13 +241,16 @@ public class swe432 extends HttpServlet {
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
 		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"" + Style + "\">");
-		out.println("<script src=\"" + jscript + "\"></script>");
+		out.println ("<script src=\"" + jscript + "\">");
+		out.println ("  function setFocus(){");
+		out.println ("    document.persist2file.NAME.focus();");
+		out.println ("  }");
+		out.println ("</script>");
 		out.println("</head>");
-		out.println("");
 	}
 
-	private void PrintBody (PrintWriter out, String Review_input) {
-		out.println("<body>");
+	private void PrintBody (PrintWriter out, String Review_input, String name, String age, String error) {
+		out.println("<body onLoad=\"setFocus()\">");
 		out.println("<h1>George Mason University Gyms Feedback");
 		out.println("<p class=\"intro\">Tell us about your experience with Mason Recreation facilities and what we can improve.</p>");
 		out.println("</h1>");
@@ -294,19 +281,19 @@ public class swe432 extends HttpServlet {
 		out.println("<p><b><u>Exercise Type (select all that apply):</u></b></p>");
 		out.println("<table align=\"center\">");
 		out.println("<tr>");
-		out.println("<td>Cardio<input type=\"checkbox\" name=\"cardio\" value=\"cardio\"/>");
-		out.println("<td>Chest<input type=\"checkbox\" name=\"chest\" value=\"chest\"/>");
-		out.println("<td>Back<input type=\"checkbox\" name=\"back\" value=\"back\"/>");
+		out.println("<td>Cardio<input type=\"checkbox\" name=\"workout\" value=\"cardio\"/>");
+		out.println("<td>Chest<input type=\"checkbox\" name=\"workout\" value=\"chest\"/>");
+		out.println("<td>Back<input type=\"checkbox\" name=\"workout\" value=\"back\"/>");
 		out.println("</tr>");
 		out.println("<tr>");
-		out.println("<td>Arms<input type=\"checkbox\" name=\"arms\" value=\"arms\"/>");
-		out.println("<td>Legs<input type=\"checkbox\" name=\"legs\" value=\"legs\"/>");
-		out.println("<td>Legs<input type=\"checkbox\" name=\"core\" value=\"core\"/>");
+		out.println("<td>Arms<input type=\"checkbox\" name=\"workout\" value=\"arms\"/>");
+		out.println("<td>Legs<input type=\"checkbox\" name=\"workout\" value=\"legs\"/>");
+		out.println("<td>Legs<input type=\"checkbox\" name=\"workout\" value=\"core\"/>");
 		out.println("</tr>");
 		out.println("<tr>");
-		out.println("<td>Basketball<input type=\"checkbox\" name=\"basketball\" value=\"basketball\"/>");
-		out.println("<td>Swimming<input type=\"checkbox\" name=\"swimming\" value=\"swimming\"/>");
-		out.println("<td>Other<input type=\"checkbox\" name=\"other\" value=\"other\"/></br>");
+		out.println("<td>Basketball<input type=\"checkbox\" name=\"workout\" value=\"basketball\"/>");
+		out.println("<td>Swimming<input type=\"checkbox\" name=\"workout\" value=\"swimming\"/>");
+		out.println("<td>Other<input type=\"checkbox\" name=\"workout\" value=\"other\"/></br>");
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</td>");
@@ -325,6 +312,40 @@ public class swe432 extends HttpServlet {
 		out.println("</table>");
 		out.println("<p style=\"text-align:center\"><input type=\"button\" value=\"Submit\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
+		out.println("<p>");
+		out.println("A simple example that demonstrates how to persist data to a XML file");
+		out.println("</p>");
+		if(error != null && error.length() > 0){
+			out.println(
+			"<p style=\"color:red;\">Please correct the following and resubmit.</p>"
+				);
+			out.println("<ol>");
+			out.println(error);
+			out.println("</ol>");
+		}
+		out.print  ("<form name=\"persist2file\" method=\"post\"");
+		out.println(" action=\""+Domain+Path+Servlet+"\">");
+		out.println("");
+		out.println(" <table>");
+		out.println("  <tr>");
+		out.println("   <td>Name:</td>");
+		out.println("   <td><input type=\"text\" name=\""+Data.NAME.name()
+		+"\" value=\""+name+"\" size=30 required></td>");
+		out.println("  </tr>");
+		out.println("  <tr>");
+		out.println("   <td>Age:</td>");
+		out.println("   <td><input type=\"text\"  name=\""+Data.AGE.name()
+		+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""
+		+age+"\" size=3 required></td>");
+		out.println("  </tr>");
+		out.println(" </table>");
+		out.println(" <br>");
+		out.println(" <br>");
+		out.println(" <input type=\"submit\" value=\"" + OperationAdd
+		+ "\" name=\"Operation\">");
+		out.println(" <input type=\"reset\" value=\"Reset\" name=\"reset\">");
+		out.println("</form>");
+		out.println("");
 		out.println("</body>");
 	}
 

@@ -336,8 +336,7 @@ public class XMLPersistenceServlet extends HttpServlet{
   /** *****************************************************
    *  Prints the <BODY> of the HTML page
   ********************************************************* */
-  private void printBody (
-   PrintWriter out, String name, String age, String error){
+  private void printBody (PrintWriter out, String name, String age, String error){
     out.println("<body onLoad=\"setFocus()\">");
     out.println("<p>");
     out.println(
