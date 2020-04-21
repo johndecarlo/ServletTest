@@ -8,6 +8,7 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.util.Enumeration;
 
+@WebServlet(name = "attributeServlet", urlPatterns = {"/attributeServlet"})
 public class attributeServlet extends HttpServlet
 {
 public void doGet (HttpServletRequest request, HttpServletResponse response)
