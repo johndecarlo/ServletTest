@@ -84,7 +84,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
       out.print  ("<br><br><a href=\"/session?action=invalidate\">");
       out.println("Invalidate the session</a>");
-      out.print  ("<br><a href=\"" + lifeCycleURL + "\">");
+      out.print  ("<br><a href=\"/session\">");
       out.println("Reload this page</a>");
 
       out.println("</body>");
