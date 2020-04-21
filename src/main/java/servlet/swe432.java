@@ -122,12 +122,13 @@ public class swe432 extends HttpServlet {
       return entries;
     }
 
-    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym) throws XMLStreamException {
+    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience) throws XMLStreamException {
         eventWriter.add(ENTRY_START);
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
         createNode(eventWriter, Data.AGE.name(), String.valueOf(age));
 				createNode(eventWriter, Data.GYM.name(), gym);
+				createNode(eventWriter, Data.GYM.name(), experience);
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
     }
@@ -184,6 +185,11 @@ public class swe432 extends HttpServlet {
                   entry.gym =event.asCharacters().getData();
                   continue;
               }
+							if (event.asStartElement().getName().getLocalPart().equals(Data.experience.name())) {
+                  event = eventReader.nextEvent();
+                  entry.experience =event.asCharacters().getData();
+                  continue;
+              }
           }
           if (event.isEndElement()) {
               EndElement endElement = event.asEndElement();
@@ -206,12 +212,12 @@ public class swe432 extends HttpServlet {
 
   	public String getAllAsHTMLTable(List<Entry> entries){
     	StringBuilder htmlOut = new StringBuilder("<table>");
-    	htmlOut.append("<tr><th>Name</th><th>Age</th></tr>");
+    	htmlOut.append("<tr><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td></tr>");
+         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
