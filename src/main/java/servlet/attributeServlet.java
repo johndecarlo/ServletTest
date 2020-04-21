@@ -36,8 +36,6 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
    if (action != null && action.equals("invalidate"))
    {  // Called from the invalidate button, kill the session.
-        // Get session object
-        HttpSession session = request.getSession();
         session.invalidate();
 
         response.setContentType("text/html");
