@@ -36,7 +36,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
       // Create a link so the user can create a new session.
       // The link will have a parameter builtin
-      out.println("<a href=\"/sessionLifeCycle?action=newSession\">");
+      out.println("<a href=\"/session?action=newSession\">");
       out.println("Create new session</A>");
 
       out.println("</body>");
@@ -84,18 +84,16 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
       out.println(session.getMaxInactiveInterval());
 
       String lifeCycleURL = "sessionLifeCycle";
-      out.print  ("<br><br><a href=\"/sessionLifeCycle?action=invalidate\">");
+      out.print  ("<br><br><a href=\"/session?action=invalidate\">");
       out.println("Invalidate the session</a>");
-      out.print  ("<br><a href=\"/sessionLifeCycle\">");
+      out.print  ("<br><a href=\"/session\">");
       out.println("Reload this page</a>");
 
       out.println("<h1><center>Session attributes</center></h1>");
 
       out.println("Enter name and value of an attribute");
 
-      // String url = response.encodeURL ("offutt/servlet/attributeServlet");
-      String url = response.encodeURL("attributeServlet");
-      out.println("<form action=\"" + url + "\" method=\"GET\">");
+      out.println("<form action=\"/session\" method=\"GET\">");
       out.println(" Name: ");
       out.println(" <input type=\"text\" size=\"10\" name=\"attrib_name\">");
 
@@ -103,8 +101,6 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
       out.println(" <input type=\"text\" size=\"10\" name=\"attrib_value\">");
 
       out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
-      out.print  ("<br><br><a href=\"/attributeServlet?action=invalidate\">");
-      out.println("Invalidate the session</a>");
       out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
       out.println("</form>");
       out.println("<hr>");
