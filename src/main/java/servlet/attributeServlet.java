@@ -50,7 +50,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
    out.println("Enter name and value of an attribute");
 
    // String url = response.encodeURL ("offutt/servlet/attributeServlet");
-   out.println("<form action=\"attributeServlet\" method=\"GET\">");
+   out.println("<form action=\"/attributeServlet\" method=\"GET\">");
    out.println(" Name: ");
    out.println(" <input type=\"text\" size=\"10\" name=\"attrib_name\">");
 
