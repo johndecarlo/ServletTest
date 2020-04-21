@@ -177,12 +177,12 @@ public class swe432 extends HttpServlet {
               }
               if (event.asStartElement().getName().getLocalPart().equals(Data.AGE.name())) {
                   event = eventReader.nextEvent();
-                  entry.age =Integer.parseInt(event.asCharacters().getData());
+                  entry.age = Integer.parseInt(event.asCharacters().getData());
                   continue;
               }
               if (event.asStartElement().getName().getLocalPart().equals(Data.GYM.name())) {
                   event = eventReader.nextEvent();
-                  entry.gym =event.asCharacters().getData();
+                  entry.gym = event.asCharacters().getData();
                   continue;
               }
 							if (event.asStartElement().getName().getLocalPart().equals(Data.EXPERIENCE.name())) {
@@ -304,9 +304,9 @@ public class swe432 extends HttpServlet {
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
 		out.println("<p><b><u>Gym Attended:</u></b></p>");
-		out.println("<label for=\"afc\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"afc\" value=\"Aquatic Fitness Center\" />A.F.C.</label></br>");
-		out.println("<label for=\"rac\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"rac\" value=\"Recreation Athletic Complex\" />R.A.C.</label></br>");
-		out.println("<label for=\"skyline\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"skyline\" value=\"Skyline\" />Skyline</label>");
+		out.println("<label for=\"afc\"><input type=\"radio\" name=\""+Data.GYM.name() + "\" id=\"afc\" value=\"Aquatic Fitness Center\" />A.F.C.</label></br>");
+		out.println("<label for=\"rac\"><input type=\"radio\" name=\""+Data.GYM.name() + "\" id=\"rac\" value=\"Recreation Athletic Complex\" />R.A.C.</label></br>");
+		out.println("<label for=\"skyline\"><input type=\"radio\" name=\""+Data.GYM.name() + "\" id=\"skyline\" value=\"Skyline\" />Skyline</label>");
 		out.println("</td>");
 		out.println("<td class=\"exercise_type\">");
 		out.println("<p><b><u>Exercise Type (select all that apply):</u></b></p>");
@@ -334,11 +334,11 @@ public class swe432 extends HttpServlet {
 		out.println("<table class=\"experience\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td bgcolor=\"#FFEF33\"><p align=\"center\"><b><u>How would you rate your experience at the gym?:</u></b></p>");
-		out.println("<label for=\"very_bad\"><input type=\"radio\" name=\"rating\" id=\"very_bad\" value=\"very_bad\" />Very bad</label>");
-		out.println("<label for=\"bad\"><input type=\"radio\" name=\"rating\" id=\"bad\" value=\"bad\" />Bad</label>");
-		out.println("<label for=\"okay\"><input type=\"radio\" name=\"rating\" id=\"okay\" value=\"okay\" /><label for=\"okay\" />Okay</label>");
-		out.println("<label for=\"good\"><input type=\"radio\" name=\"rating\" id=\"good\" value=\"good\" />Good</label>");
-		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"rating\" id=\"very_good\" value=\"very_good\" />Very good</label>");
+		out.println("<label for=\"very_bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_bad\" value=\"very_bad\" />Very bad</label>");
+		out.println("<label for=\"bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"bad\" value=\"bad\" />Bad</label>");
+		out.println("<label for=\"okay\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"okay\" value=\"okay\" /><label for=\"okay\" />Okay</label>");
+		out.println("<label for=\"good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"good\" value=\"good\" />Good</label>");
+		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_good\" value=\"very_good\" />Very good</label>");
 		out.println("<tr/>");
 		out.println("</table>");
 		out.println("<p style=\"text-align:center\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
