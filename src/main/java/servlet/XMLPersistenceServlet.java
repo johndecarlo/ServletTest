@@ -230,9 +230,7 @@ public class XMLPersistenceServlet extends HttpServlet{
    *  back to the client.
   ********************************************************* */
   @Override
-  public void doPost (HttpServletRequest request, HttpServletResponse response)
-     throws ServletException, IOException
-  {
+  public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
      String name = request.getParameter(Data.NAME.name());
      String rawAge = request.getParameter(Data.AGE.name());
      Integer age = null;
@@ -297,8 +295,6 @@ public class XMLPersistenceServlet extends HttpServlet{
        printBody(out, name, rawAge, error);
        printTail(out);
      }
-
-
   }
 
   /** *****************************************************

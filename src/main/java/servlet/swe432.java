@@ -225,26 +225,91 @@ public class swe432 extends HttpServlet {
   	}
 	}
 
-	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String gym = request.getParameter("gym");
-		String experience = request.getParameter("rating");
-		String final_result = "Thank you for telling us about your " + experience + " experience at " + gym;
+	/** *****************************************************
+   *  Overrides HttpServlet's doPost().
+   *  Converts the values in the form, performs the operation
+   *  indicated by the submit button, and sends the results
+   *  back to the client.
+  ********************************************************* */
+  @Override
+  public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+     String name = request.getParameter(Data.NAME.name());
+     String rawAge = request.getParameter(Data.AGE.name());
+     Integer age = null;
+		 String gym = request.getParameter(Data.GYM.name());
+		 String experience = request.getParameter(Data.EXPERIENCE.name());
+		 String error = "";
 
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		PrintHead(out);
-		out.println("<body>");
-		out.println("<p class=\"result\">Your review has been submitted</p>");
-		out.println("<p class=\"result\">" + final_result + "</p>");
-		out.println("<body>");
-		out.println("</html>");
-	}
+		 if(name == null){
+       error= "<li>Name is required</li>";
+       name = "";
+     }
+     if(rawAge == null){
+       error+= "<li>Age is required.<li>";
+       rawAge = "";
+     }else{
+          try{
+            age =new Integer(rawAge);
+            if(age<1){
+                error+= "<li>Age must be an integer greater than 0.</li>";
+                rawAge = "";
+            }else{
+              if(age>150){
+                  error+= "<li>Age must be an integer less than 150.</li>";
+                  rawAge = "";
+              }
+            }
+          }catch (Exception e) {
+            error+= "<li>Age must be an integer greater than 0.</li>";
+            rawAge = "";
+          }
+     }
+		 if(gym == null){
+       error= "<li>Gym is required</li>";
+       name = "";
+     }
+		 if(experience == null){
+       error= "<li>Experience is required</li>";
+       name = "";
+     }
+
+     response.setContentType("text/html");
+     PrintWriter out = response.getWriter();
+
+     if (error.length() == 0){
+       EntryManager entryManager = new EntryManager();
+       entryManager.setFilePath(RESOURCE_FILE);
+       List<Entry> newEntries= null;
+       try{
+         newEntries=entryManager.save(name, age);
+       }catch(FileNotFoundException e){
+         e.printStackTrace();
+          error+= "<li>Could not save entry.</li>";
+       }
+       catch(XMLStreamException e){
+         e.printStackTrace();
+          error+= "<li>Could not save entry.</li>";
+       }
+       printHead(out);
+       if(newEntries ==  null){
+         error+= "<li>Could not save entry.</li>";
+         printBody(out, name, rawAge, error);
+       }else{
+         printResponseBody(out, entryManager.getAllAsHTMLTable(newEntries));
+       }
+       printTail(out);
+     }else{
+       printHead(out);
+       printBody(out, name, rawAge, error);
+       printTail(out);
+     }
+  }
 
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 	    PrintWriter out = response.getWriter();
 	    PrintHead(out);
-	    PrintBody(out, "Hello", "", "", "");
+	    PrintBody(out, "", "", "");
 		PrintTail(out);
 	}
 
@@ -262,7 +327,7 @@ public class swe432 extends HttpServlet {
 		out.println("</head>");
 	}
 
-	private void PrintBody (PrintWriter out, String Review_input, String name, String age, String error) {
+	private void PrintBody (PrintWriter out, String name, String age, String error) {
 		out.println("<body onLoad=\"setFocus()\">");
 		out.println("<h1>George Mason University Gyms Feedback");
 		out.println("<p class=\"intro\">Tell us about your experience with Mason Recreation facilities and what we can improve.</p>");
@@ -341,6 +406,18 @@ public class swe432 extends HttpServlet {
 		out.println("</table>");
 		out.println("<p style=\"text-align:center\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
+		out.println("</body>");
+	}
+
+	/** *****************************************************
+	 *  Prints the <BODY> of the HTML page with persisted entries
+	********************************************************* */
+	private void printResponseBody (PrintWriter out, String tableString){
+		out.println("<body>");
+		out.println("<p class=\"result\">Your review has been submitted</p>");
+		out.println("");
+		out.println(tableString);
+		out.println("");
 		out.println("</body>");
 	}
 
