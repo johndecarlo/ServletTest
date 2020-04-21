@@ -81,7 +81,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
      // String url = response.encodeURL ("offutt/servlet/attributeServlet");
      String url = response.encodeURL("attributeServlet");
-     out.println("<form action=\"attributeServlet" method=\"GET\">");
+     out.println("<form action=\"attributeServlet\" method=\"GET\">");
      out.println(" Name: ");
      out.println(" <input type=\"text\" size=\"10\" name=\"attrib_name\">");
 
