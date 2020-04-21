@@ -233,7 +233,7 @@ public class swe432 extends HttpServlet {
    *  back to the client.
   ********************************************************* */
   @Override
-  public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
      String name = request.getParameter(Data.NAME.name());
      String rawAge = request.getParameter(Data.AGE.name());
      Integer age = null;
@@ -291,26 +291,26 @@ public class swe432 extends HttpServlet {
          e.printStackTrace();
           error+= "<li>Could not save entry.</li>";
        }
-       printHead(out);
+       PrintHead(out);
        if(newEntries ==  null){
          error+= "<li>Could not save entry.</li>";
-         printBody(out, name, rawAge, error);
+         PrintBody(out, name, rawAge, error);
        }else{
          printResponseBody(out, entryManager.getAllAsHTMLTable(newEntries));
        }
-       printTail(out);
+       PrintTail(out);
      }else{
-       printHead(out);
-       printBody(out, name, rawAge, error);
-       printTail(out);
+       PrintHead(out);
+       PrintBody(out, name, rawAge, error);
+       PrintTail(out);
      }
   }
 
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-	    PrintWriter out = response.getWriter();
-	    PrintHead(out);
-	    PrintBody(out, "", "", "");
+	  PrintWriter out = response.getWriter();
+	  PrintHead(out);
+	  PrintBody(out, "", "", "");
 		PrintTail(out);
 	}
 
