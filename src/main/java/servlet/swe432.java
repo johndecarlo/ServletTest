@@ -179,12 +179,10 @@ public class swe432 extends HttpServlet {
                   entry.age =Integer.parseInt(event.asCharacters().getData());
                   continue;
               }
-							if (event.isStartElement()) {
-                  if (event.asStartElement().getName().getLocalPart().equals(Data.GYM.name())) {
-                      event = eventReader.nextEvent();
-                      entry.gym =event.asCharacters().getData();
-                      continue;
-                  }
+              if (event.asStartElement().getName().getLocalPart().equals(Data.GYM.name())) {
+                  event = eventReader.nextEvent();
+                  entry.gym =event.asCharacters().getData();
+                  continue;
               }
           }
           if (event.isEndElement()) {
@@ -294,14 +292,14 @@ public class swe432 extends HttpServlet {
 		out.println("</tr>");
 		out.println("<tr>");
 		out.println("<td>Age:</td>");
-		out.println("<td><input type=\"text\"  name=\""+Data.AGE.name()+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""+age+"\" size=3 required></td>");
+		out.println("<td><input type=\"text\" name=\""+Data.AGE.name()+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""+age+"\" size=3 required></td>");
 		out.println("</table>");
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
 		out.println("<p><b><u>Gym Attended:</u></b></p>");
-		out.println("<label for=\"afc\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"afc\" value=\"the AFC\" />A.F.C.</label></br>");
-		out.println("<label for=\"rac\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"rac\" value=\"the RAC\" />R.A.C.</label></br>");
+		out.println("<label for=\"afc\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"afc\" value=\"Aquatic Fitness Center\" />A.F.C.</label></br>");
+		out.println("<label for=\"rac\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"rac\" value=\"Recreation Athletic Complex\" />R.A.C.</label></br>");
 		out.println("<label for=\"skyline\"><input type=\"radio\" name="+Data.GYM.name()+" id=\"skyline\" value=\"Skyline\" />Skyline</label>");
 		out.println("</td>");
 		out.println("<td class=\"exercise_type\">");
