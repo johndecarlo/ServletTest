@@ -349,14 +349,6 @@ public class swe432 extends HttpServlet {
 		out.println("<br>");
 		out.print("<form name=\"persist2file\" method=\"post\"");
 		out.println(" action=\""+Domain+Path+Servlet+"\">");
-		if(error != null && error.length() > 0){
-			out.println(
-			"<p style=\"color:red;\">Please correct the following and resubmit.</p>"
-				);
-			out.println("<ol>");
-			out.println(error);
-			out.println("</ol>");
-		}
 		out.println("<table class = \"user_input\">");
 		out.println("<tr>");
 		out.println("<td>Name:</td>");
@@ -370,7 +362,7 @@ public class swe432 extends HttpServlet {
 		out.println("<p><b><u>Gym Attended:</u></b></p>");
 		out.println("<label for=\"afc\"><input type=\"radio\" name=\""+Data.GYM.name() + "\" id=\"afc\" value=\"Aquatic Fitness Center\" />A.F.C.</label></br>");
 		out.println("<label for=\"rac\"><input type=\"radio\" name=\""+Data.GYM.name() + "\" id=\"rac\" value=\"Recreation Athletic Complex\" />R.A.C.</label></br>");
-		out.println("<label for=\"skyline\"><input type=\"radio\" name=\""+Data.GYM.name() + "\" id=\"skyline\" value=\"Skyline\" />Skyline</label>");
+		out.println("<label for=\"skyline\"><input type=\"radio\" name=\""+Data.GYM.name() + "\" id=\"skyline\" value=\"Skyline Fitness Center\" />Skyline</label>");
 		out.println("</td>");
 		out.println("<td class=\"exercise_type\">");
 		out.println("<p><b><u>Exercise Type (select all that apply):</u></b></p>");
@@ -398,13 +390,21 @@ public class swe432 extends HttpServlet {
 		out.println("<table class=\"experience\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td bgcolor=\"#FFEF33\"><p align=\"center\"><b><u>How would you rate your experience at the gym?:</u></b></p>");
-		out.println("<label for=\"very_bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_bad\" value=\"very_bad\" />Very bad</label>");
+		out.println("<label for=\"very_bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_bad\" value=\"Very Bad\" />Very bad</label>");
 		out.println("<label for=\"bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"bad\" value=\"bad\" />Bad</label>");
-		out.println("<label for=\"okay\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"okay\" value=\"okay\" /><label for=\"okay\" />Okay</label>");
+		out.println("<label for=\"okay\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"okay\" value=\"okay\" /><label for=\"Okay\" />Okay</label>");
 		out.println("<label for=\"good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"good\" value=\"good\" />Good</label>");
-		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_good\" value=\"very_good\" />Very good</label>");
+		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_good\" value=\"Very Good\" />Very good</label>");
 		out.println("<tr/>");
 		out.println("</table>");
+		if(error != null && error.length() > 0){
+			out.println(
+			"<p style=\"color:red; text-align:center;\">Please correct the following and resubmit.</p>"
+				);
+			out.println("<ol>");
+			out.println(error);
+			out.println("</ol>");
+		}
 		out.println("<p style=\"text-align:center\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
 		out.println("</body>");
