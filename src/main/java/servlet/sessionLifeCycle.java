@@ -35,7 +35,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
       // Create a link so the user can create a new session.
       // The link will have a parameter builtin
-      out.println("<a href=\"/session?action=newSession\">");
+      out.println("<a href=\"/attributeServlet?action=newSession\">");
       out.println("Create new session</A>");
 
       out.println("</body>");
@@ -82,9 +82,9 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
       out.print  ("<br>Maximum inactive interval (seconds): ");
       out.println(session.getMaxInactiveInterval());
 
-      out.print  ("<br><br><a href=\"/session?action=invalidate\">");
+      out.print  ("<br><br><a href=\"/attributeServlet?action=invalidate\">");
       out.println("Invalidate the session</a>");
-      out.print  ("<br><a href=\"/session\">");
+      out.print  ("<br><a href=\"/attributeServlet\">");
       out.println("Reload this page</a>");
 
       out.println("</body>");
