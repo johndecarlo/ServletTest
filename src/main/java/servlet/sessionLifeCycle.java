@@ -35,8 +35,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
 
       // Create a link so the user can create a new session.
       // The link will have a parameter builtin
-      String lifeCycleURL = "sessionLifeCycle";
-      out.println("<a href=\"" + lifeCycleURL + "?action=newSession\">");
+      out.println("<a href=\"/sessionLifeCycle?action=newSession\">");
       out.println("Create new session</A>");
 
       out.println("</body>");
@@ -84,7 +83,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
       out.println(session.getMaxInactiveInterval());
 
       String lifeCycleURL = "sessionLifeCycle";
-      out.print  ("<br><br><a href=\"" + lifeCycleURL + "?action=invalidate\">");
+      out.print  ("<br><br><a href=\"/sessionLifeCycle?action=invalidate\">");
       out.println("Invalidate the session</a>");
       out.print  ("<br><a href=\"" + lifeCycleURL + "\">");
       out.println("Reload this page</a>");

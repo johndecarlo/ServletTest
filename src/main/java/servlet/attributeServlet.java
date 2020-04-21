@@ -53,7 +53,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
         // Create a link so the user can create a new session.
         // The link will have a parameter builtin
         String lifeCycleURL = "/attributeServlet";
-        out.println("<a href=\"" + lifeCycleURL + "?action=newSession\">");
+        out.println("<a href=\"/attributeServlet?action=newSession\">");
         out.println("Create new session</A>");
 
         out.println("</body>");
@@ -89,8 +89,7 @@ public void doGet (HttpServletRequest request, HttpServletResponse response)
      out.println(" <input type=\"text\" size=\"10\" name=\"attrib_value\">");
 
      out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
-     String lifeCycleURL = "/attributeServlet";
-     out.print  ("<br><br><a href=\"" + lifeCycleURL + "?action=invalidate\">");
+     out.print  ("<br><br><a href=\"/attributeServlet?action=invalidate\">");
      out.println("Invalidate the session</a>");
      out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
      out.println("</form>");
