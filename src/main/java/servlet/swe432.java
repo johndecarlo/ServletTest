@@ -185,7 +185,7 @@ public class swe432 extends HttpServlet {
                   entry.gym =event.asCharacters().getData();
                   continue;
               }
-							if (event.asStartElement().getName().getLocalPart().equals(Data.experience.name())) {
+							if (event.asStartElement().getName().getLocalPart().equals(Data.EXPERIENCE.name())) {
                   event = eventReader.nextEvent();
                   entry.experience =event.asCharacters().getData();
                   continue;
