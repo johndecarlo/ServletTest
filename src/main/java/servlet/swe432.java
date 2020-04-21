@@ -51,7 +51,7 @@ public class swe432 extends HttpServlet {
 
   static String Domain  = "";
   static String Path    = "/";
-  static String Servlet = "gymReviewXml";
+  static String Servlet = "swe432-assignment-6";
 
   public class Entry {
     String name;
