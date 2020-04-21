@@ -295,8 +295,6 @@ public class swe432 extends HttpServlet {
 		out.println("<tr>");
 		out.println("<td>Name:</td>");
 		out.println("<td><input type=\"text\" name=\""+Data.NAME.name()+"\" value=\""+name+"\" size=30 required></td>");
-		out.println("</tr>");
-		out.println("<tr>");
 		out.println("<td>Age:</td>");
 		out.println("<td><input type=\"text\" name=\""+Data.AGE.name()+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""+age+"\" size=3 required></td>");
 		out.println("</table>");
