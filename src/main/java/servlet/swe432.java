@@ -287,7 +287,7 @@ public class swe432 extends HttpServlet {
 			out.println(error);
 			out.println("</ol>");
 		}
-		out.println("<table class = \"user_input\">")
+		out.println("<table class = \"user_input\">");
 		out.println("<tr>");
 		out.println("<td>Name:</td>");
 		out.println("<td><input type=\"text\" name=\""+Data.NAME.name()+"\" value=\""+name+"\" size=30 required></td>");
@@ -295,7 +295,7 @@ public class swe432 extends HttpServlet {
 		out.println("<tr>");
 		out.println("<td>Age:</td>");
 		out.println("<td><input type=\"text\"  name=\""+Data.AGE.name()+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""+age+"\" size=3 required></td>");
-		out.println("</table>")
+		out.println("</table>");
 		out.println("<table class=\"user_input\" cellspacing=5>");
 		out.println("<tr>");
 		out.println("<td class=\"gym_type\">");
