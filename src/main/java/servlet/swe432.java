@@ -93,12 +93,13 @@ public class swe432 extends HttpServlet {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age, String gym) throws FileNotFoundException, XMLStreamException {
+    public List<Entry> save(String name, Integer age, String gym, String experience) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
       newEntry.age = age;
 			newEntry.gym = gym;
+			newEntry.experience = experience;
       entries.add(newEntry);
 
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -281,7 +282,7 @@ public class swe432 extends HttpServlet {
        entryManager.setFilePath(RESOURCE_FILE);
        List<Entry> newEntries= null;
        try{
-         newEntries=entryManager.save(name, age);
+         newEntries=entryManager.save(name, age, gym, experience);
        }catch(FileNotFoundException e){
          e.printStackTrace();
           error+= "<li>Could not save entry.</li>";
