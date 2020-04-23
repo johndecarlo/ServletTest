@@ -58,7 +58,7 @@ public class swe432 extends HttpServlet {
     Integer age;
 		String gym;
 		String experience;
-		List<String> workout;
+		String workout;
   }
 
   List<Entry> entries;
@@ -93,13 +93,14 @@ public class swe432 extends HttpServlet {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age, String gym, String experience) throws FileNotFoundException, XMLStreamException {
+    public List<Entry> save(String name, Integer age, String gym, String experience, String workout) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
       newEntry.age = age;
 			newEntry.gym = gym;
 			newEntry.experience = experience;
+			newEntry.workout = workout;
       entries.add(newEntry);
 
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -112,7 +113,7 @@ public class swe432 extends HttpServlet {
       eventWriter.add(LINE_END);
 
       for(Entry entry: entries) {
-        addEntry(eventWriter, entry.name, entry.age, entry.gym, entry.experience);
+        addEntry(eventWriter, entry.name, entry.age, entry.gym, entry.experience, entry.workout);
       }
 
       eventWriter.add(ENTRIES_END);
@@ -123,13 +124,14 @@ public class swe432 extends HttpServlet {
       return entries;
     }
 
-    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience) throws XMLStreamException {
+    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout) throws XMLStreamException {
         eventWriter.add(ENTRY_START);
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
         createNode(eventWriter, Data.AGE.name(), String.valueOf(age));
 				createNode(eventWriter, Data.GYM.name(), gym);
 				createNode(eventWriter, Data.EXPERIENCE.name(), experience);
+				createNode(eventWriter, Data.EXPERIENCE.name(), workout);
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
     }
@@ -191,6 +193,11 @@ public class swe432 extends HttpServlet {
                   entry.experience =event.asCharacters().getData();
                   continue;
               }
+							if (event.asStartElement().getName().getLocalPart().equals(Data.WORKOUT.name())) {
+                  event = eventReader.nextEvent();
+                  entry.experience =event.asCharacters().getData();
+                  continue;
+              }
           }
           if (event.isEndElement()) {
               EndElement endElement = event.asEndElement();
@@ -218,7 +225,7 @@ public class swe432 extends HttpServlet {
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td></tr>");
+         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td><td>"+entry.workout+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
@@ -239,6 +246,7 @@ public class swe432 extends HttpServlet {
      Integer age = null;
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
+		 String workout = request.getParameter(Data.NAME.name());
 		 String error = "";
 
 		 if(name == null) {
@@ -257,6 +265,10 @@ public class swe432 extends HttpServlet {
 				error= "<li>Experience is required</li>";
 				name = "";
 			}
+			if(workout == null) {
+ 				error= "<li>Workout is required</li>";
+ 				name = "";
+ 			}
 		 else {
           try{
             age =new Integer(rawAge);
@@ -369,19 +381,19 @@ public class swe432 extends HttpServlet {
 		out.println("<p><b><u>Exercise Type (select all that apply):</u></b></p>");
 		out.println("<table align=\"center\">");
 		out.println("<tr>");
-		out.println("<td>Cardio<input type=\"checkbox\" name=\"workout\" value=\"cardio\"/>");
-		out.println("<td>Chest<input type=\"checkbox\" name=\"workout\" value=\"chest\"/>");
-		out.println("<td>Back<input type=\"checkbox\" name=\"workout\" value=\"back\"/>");
+		out.println("<td>Cardio<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Cardio\"/>");
+		out.println("<td>Chest<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Chest\"/>");
+		out.println("<td>Back<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Back\"/>");
 		out.println("</tr>");
 		out.println("<tr>");
-		out.println("<td>Arms<input type=\"checkbox\" name=\"workout\" value=\"arms\"/>");
-		out.println("<td>Legs<input type=\"checkbox\" name=\"workout\" value=\"legs\"/>");
-		out.println("<td>Legs<input type=\"checkbox\" name=\"workout\" value=\"core\"/>");
+		out.println("<td>Arms<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Arms\"/>");
+		out.println("<td>Legs<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Legs\"/>");
+		out.println("<td>Legs<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Core\"/>");
 		out.println("</tr>");
 		out.println("<tr>");
-		out.println("<td>Basketball<input type=\"checkbox\" name=\"workout\" value=\"basketball\"/>");
-		out.println("<td>Swimming<input type=\"checkbox\" name=\"workout\" value=\"swimming\"/>");
-		out.println("<td>Other<input type=\"checkbox\" name=\"workout\" value=\"other\"/></br>");
+		out.println("<td>Basketball<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Basketball\"/>");
+		out.println("<td>Swimming<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Swimming\"/>");
+		out.println("<td>Other<input type=\"checkbox\" name=\""+Data.WORKOUT.name() + "\" value=\"Other\"/></br>");
 		out.println("</tr>");
 		out.println("</table>");
 		out.println("</td>");
@@ -392,9 +404,9 @@ public class swe432 extends HttpServlet {
 		out.println("<tr>");
 		out.println("<td bgcolor=\"#FFEF33\"><p align=\"center\"><b><u>How would you rate your experience at the gym?:</u></b></p>");
 		out.println("<label for=\"very_bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_bad\" value=\"Very Bad\" />Very bad</label>");
-		out.println("<label for=\"bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"bad\" value=\"bad\" />Bad</label>");
-		out.println("<label for=\"okay\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"okay\" value=\"okay\" /><label for=\"Okay\" />Okay</label>");
-		out.println("<label for=\"good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"good\" value=\"good\" />Good</label>");
+		out.println("<label for=\"bad\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"bad\" value=\"Bad\" />Bad</label>");
+		out.println("<label for=\"okay\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"okay\" value=\"Okay\" /><label for=\"Okay\" />Okay</label>");
+		out.println("<label for=\"good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"good\" value=\"Good\" />Good</label>");
 		out.println("<label for=\"very_good\"><input type=\"radio\" name=\"" + Data.EXPERIENCE.name() + "\" id=\"very_good\" value=\"Very Good\" />Very good</label>");
 		out.println("<tr/>");
 		out.println("</table>");
