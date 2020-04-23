@@ -195,7 +195,7 @@ public class swe432 extends HttpServlet {
               }
 							if (event.asStartElement().getName().getLocalPart().equals(Data.WORKOUT.name())) {
                   event = eventReader.nextEvent();
-                  entry.experience =event.asCharacters().getData();
+                  entry.workout = event.asCharacters().getData();
                   continue;
               }
           }
@@ -246,7 +246,7 @@ public class swe432 extends HttpServlet {
      Integer age = null;
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
-		 String workout = request.getParameter(Data.NAME.name());
+		 String workout = request.getParameter(Data.WORKOUT.name());
 		 String error = "";
 
 		 if(name == null) {
