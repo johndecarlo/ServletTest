@@ -43,7 +43,7 @@ import javax.xml.stream.events.XMLEvent;
 public class swe432 extends HttpServlet {
 
 	static String Style = "swe432.css";
-	static String jscript = "swe432.js";
+	//static String jscript = "swe432.js";
 
 	static enum Data {NAME, AGE, GYM, EXPERIENCE, WORKOUT, ENTRY, ENTRIES};
 
@@ -212,7 +212,7 @@ public class swe432 extends HttpServlet {
     }
 
   	public String getAllAsHTMLTable(List<Entry> entries){
-    	StringBuilder htmlOut = new StringBuilder("<table>");
+    	StringBuilder htmlOut = new StringBuilder("<table class = \"user_input\">");
     	htmlOut.append("<tr><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
@@ -241,14 +241,23 @@ public class swe432 extends HttpServlet {
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String error = "";
 
-		 if(name == null){
+		 if(name == null) {
        error= "<li>Name is required</li>";
        name = "";
      }
-     if(rawAge == null){
+     if(rawAge == null) {
        error+= "<li>Age is required.<li>";
        rawAge = "";
-     }else{
+     }
+		 if(gym == null) {
+				error= "<li>Gym is required</li>";
+				name = "";
+			}
+		 if(experience == null) {
+				error= "<li>Experience is required</li>";
+				name = "";
+			}
+		 else {
           try{
             age =new Integer(rawAge);
             if(age<1){
@@ -264,14 +273,6 @@ public class swe432 extends HttpServlet {
             error+= "<li>Age must be an integer greater than 0.</li>";
             rawAge = "";
           }
-     }
-		 if(gym == null){
-       error= "<li>Gym is required</li>";
-       name = "";
-     }
-		 if(experience == null){
-       error= "<li>Experience is required</li>";
-       name = "";
      }
 
      response.setContentType("text/html");
