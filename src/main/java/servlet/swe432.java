@@ -321,7 +321,7 @@ public class swe432 extends HttpServlet {
 		out.println("<head>");
 		out.println("<title>GMU Gym Review</title>");
 		out.println(" <link rel=\"stylesheet\" type=\"text/css\" href=\"" + Style + "\">");
-		out.println ("<script src=\"" + jscript + "\">");
+		out.println ("<script>");
 		out.println ("  function setFocus(){");
 		out.println ("    document.persist2file.NAME.focus();");
 		out.println ("  }");
