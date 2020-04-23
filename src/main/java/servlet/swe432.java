@@ -129,7 +129,7 @@ public class swe432 extends HttpServlet {
         createNode(eventWriter, Data.NAME.name(), name);
         createNode(eventWriter, Data.AGE.name(), String.valueOf(age));
 				createNode(eventWriter, Data.GYM.name(), gym);
-				createNode(eventWriter, Data.GYM.name(), experience);
+				createNode(eventWriter, Data.EXPERIENCE.name(), experience);
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
     }
