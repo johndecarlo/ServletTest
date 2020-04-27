@@ -246,10 +246,10 @@ public class swe432 extends HttpServlet {
      Integer age = null;
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
-		 List<String> workout = request.getParameterValues(Data.WORKOUT.name());
+		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
 		 String result = "";
-		 for(int i = 0; i < workout.size(); i++) {
-			 result += workout.get(i);
+		 for(int i = 0; i < workout.length; i++) {
+			 result += workout[i];
 		 }
 		 String error = "";
 
@@ -299,7 +299,7 @@ public class swe432 extends HttpServlet {
        entryManager.setFilePath(RESOURCE_FILE);
        List<Entry> newEntries= null;
        try{
-         newEntries=entryManager.save(name, age, gym, experience, workout);
+         newEntries=entryManager.save(name, age, gym, experience, result);
        }catch(FileNotFoundException e){
          e.printStackTrace();
           error+= "<li>Could not save entry.</li>";
