@@ -220,12 +220,12 @@ public class swe432 extends HttpServlet {
 
   	public String getAllAsHTMLTable(List<Entry> entries){
     	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align:center;color:#FFFFFF;font-size:125%;margin:auto;\">");
-    	htmlOut.append("<tr><th class=\"result\">Name</th><th class=\"result\">Age</th><th class=\"result\">Gym</th><th class=\"result\">Experience</th><th class=\"result\">Workout</th></tr>");
+    	htmlOut.append("<tr><th stlye=\"text-align:left;\">Name</th><th stlye=\"text-align:left;\">Age</th><th stlye=\"text-align:left;\">Gym</th><th stlye=\"text-align:left;\">Experience</th><th stlye=\"text-align:left;\">Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td><td>"+entry.workout+"</td></tr>");
+         	htmlOut.append("<tr><td stlye=\"text-align:left;\">"+entry.name+"</td><td stlye=\"text-align:left;\">"+entry.age+"</td><td stlye=\"text-align:left;\">"+entry.gym+"</td><td stlye=\"text-align:left;\">"+entry.experience+"</td><td stlye=\"text-align:left;\">"+entry.workout+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
@@ -265,36 +265,36 @@ public class swe432 extends HttpServlet {
 		 String error = "";
 
 		 if(name == null) {
-       error= "<li>Name is required</li>";
+       error= "<li style=\"text-align:center;color:white;\">Name is required</li>";
        name = "";
      }
      if(rawAge == null) {
-       error+= "<li>Age is required.<li>";
+       error+= "<li style=\"text-align:center;color:white;\">Age is required.<li>";
        rawAge = "";
      }
 		 if(gym == null) {
-				error= "<li>Gym is required</li>";
+				error= "<li style=\"text-align:center;color:white;\">Gym is required</li>";
 			}
 		 if(experience == null) {
-				error= "<li>Experience is required</li>";
+				error= "<li style=\"text-align:center;color:white;\">Experience is required</li>";
 			}
 			if(workout == null) {
- 				error= "<li>Workout is required</li>";
+ 				error= "<li style=\"text-align:center;color:white;\">Workout is required</li>";
  			}
 		 else {
           try{
             age =new Integer(rawAge);
             if(age<1){
-                error+= "<li>Age must be an integer greater than 0.</li>";
+                error+= "<li style=\"text-align:center;color:white;\">Age must be an integer greater than 0.</li>";
                 rawAge = "";
             }else{
               if(age>150){
-                  error+= "<li>Age must be an integer less than 150.</li>";
+                  error+= "<li style=\"text-align:center;color:white;\">Age must be an integer less than 150.</li>";
                   rawAge = "";
               }
             }
           }catch (Exception e) {
-            error+= "<li>Age must be an integer greater than 0.</li>";
+            error+= "<li style=\"text-align:center;color:white;\">Age must be an integer greater than 0.</li>";
             rawAge = "";
           }
      }
@@ -310,15 +310,15 @@ public class swe432 extends HttpServlet {
          newEntries=entryManager.save(name, age, gym, experience, result);
        }catch(FileNotFoundException e){
          e.printStackTrace();
-          error+= "<li>Could not save entry.</li>";
+          error+= "<li style=\"text-align:center;color:white;\">Could not save entry.</li>";
        }
        catch(XMLStreamException e){
          e.printStackTrace();
-          error+= "<li>Could not save entry.</li>";
+          error+= "<li style=\"text-align:center;color:white;\">Could not save entry.</li>";
        }
        PrintHead(out);
        if(newEntries ==  null){
-         error+= "<li>Could not save entry.</li>";
+         error+= "<li style=\"text-align:center;color:white;\">Could not save entry.</li>";
          PrintBody(out, name, rawAge, error);
        }else{
          printResponseBody(out, entryManager.getAllAsHTMLTable(newEntries));
@@ -426,9 +426,9 @@ public class swe432 extends HttpServlet {
 			out.println(
 			"<p style=\"color:red; text-align:center;\">Please correct the following and resubmit.</p>"
 				);
-			out.println("<p style=\"text-align:center;color:white;\">");
+			out.println("<ol style=\"text-align:center;color:white;\">");
 			out.println(error);
-			out.println("</p>");
+			out.println("</ol>");
 		}
 		out.println("<p style=\"text-align:center;\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
