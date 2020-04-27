@@ -213,7 +213,7 @@ public class swe432 extends HttpServlet {
               }
 							if (event.asStartElement().getName().getLocalPart().equals(Data.TIME.name())) {
                   event = eventReader.nextEvent();
-                  entry.time = new Date(Long.parseInt(event.asCharacters().getData()));
+                  entry.time = new Date(Long.parseLong(event.asCharacters().getData()));
                   continue;
               }
           }
@@ -326,7 +326,7 @@ public class swe432 extends HttpServlet {
        entryManager.setFilePath(RESOURCE_FILE);
        List<Entry> newEntries= null;
        try{
-         newEntries=entryManager.save(name, age, gym, experience, result, time);
+         newEntries=entryManager.save(name, age, gym, experience, result, new Date(time));
        }catch(FileNotFoundException e){
          e.printStackTrace();
           error+= "<li style=\"text-align:center;color:white;\">Could not save entry.</li>";
