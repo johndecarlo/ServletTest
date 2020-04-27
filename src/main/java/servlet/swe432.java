@@ -219,8 +219,8 @@ public class swe432 extends HttpServlet {
     }
 
   	public String getAllAsHTMLTable(List<Entry> entries){
-    	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align:center;color:#FFFFFF;font-size:200%;margin:auto;\">");
-    	htmlOut.append("<tr><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
+    	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align:center;color:#FFFFFF;font-size:125%;margin:auto;\">");
+    	htmlOut.append("<tr><th class=\"result\">Name</th><th class=\"result\">Age</th><th class=\"result\">Gym</th><th class=\"result\">Experience</th><th class=\"result\">Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
@@ -426,9 +426,9 @@ public class swe432 extends HttpServlet {
 			out.println(
 			"<p style=\"color:red; text-align:center;\">Please correct the following and resubmit.</p>"
 				);
-			out.println("<ol style=\"text-align:center;color:white;\">");
+			out.println("<p style=\"text-align:center;color:white;\">");
 			out.println(error);
-			out.println("</ol>");
+			out.println("</p>");
 		}
 		out.println("<p style=\"text-align:center;\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
