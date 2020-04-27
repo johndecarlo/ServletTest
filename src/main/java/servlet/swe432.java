@@ -136,7 +136,7 @@ public class swe432 extends HttpServlet {
       return entries;
     }
 
-    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout, Long time) throws XMLStreamException {
+    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout, Date time) throws XMLStreamException {
         eventWriter.add(ENTRY_START);
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
@@ -144,7 +144,7 @@ public class swe432 extends HttpServlet {
 				createNode(eventWriter, Data.GYM.name(), gym);
 				createNode(eventWriter, Data.EXPERIENCE.name(), experience);
 				createNode(eventWriter, Data.WORKOUT.name(), workout);
-				createNode(eventWriter, Data.TIME.name(), String.valueOf(time));
+				createNode(eventWriter, Data.TIME.name(), time.toString());
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
     }
