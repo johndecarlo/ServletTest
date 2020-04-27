@@ -327,7 +327,7 @@ public class swe432 extends HttpServlet {
        entryManager.setFilePath(RESOURCE_FILE);
        List<Entry> newEntries= null;
        try{
-         newEntries=entryManager.save(name, age, gym, experience, result, new Date(time));
+         newEntries=entryManager.save(name, age, gym, experience, result, time);
        }catch(FileNotFoundException e){
          e.printStackTrace();
           error+= "<li style=\"text-align:center;color:white;\">Could not save entry.</li>";
