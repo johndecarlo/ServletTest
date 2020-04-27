@@ -104,7 +104,7 @@ public class swe432 extends HttpServlet {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age, String gym, String experience, String workout, Long time) throws FileNotFoundException, XMLStreamException {
+    public List<Entry> save(String name, Integer age, String gym, String experience, String workout, Date time) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
@@ -112,7 +112,7 @@ public class swe432 extends HttpServlet {
 			newEntry.gym = gym;
 			newEntry.experience = experience;
 			newEntry.workout = workout;
-			newEntry.time = new Date(time);
+			newEntry.time = time;
       entries.add(newEntry);
 
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -213,7 +213,7 @@ public class swe432 extends HttpServlet {
               }
 							if (event.asStartElement().getName().getLocalPart().equals(Data.TIME.name())) {
                   event = eventReader.nextEvent();
-                  entry.time = Long.parseLong(event.asCharacters().getData());
+                  entry.time = new Date(Long.parseInt(event.asCharacters().getData()));
                   continue;
               }
           }
@@ -265,7 +265,7 @@ public class swe432 extends HttpServlet {
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
-		 Long time = new Long(session.getLastAccessedTime());
+		 Long time = session.getLastAccessedTime();
 		 String result = "";
 		 if(workout != null) {
 			 if(workout.length == 1)
