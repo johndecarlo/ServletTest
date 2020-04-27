@@ -265,7 +265,7 @@ public class swe432 extends HttpServlet {
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
-		 Integer time = new Integer(session.getLastAccessedTime());
+		 Integer time = session.getLastAccessedTime().intValue();
 		 String result = "";
 		 if(workout != null) {
 			 if(workout.length == 1)
