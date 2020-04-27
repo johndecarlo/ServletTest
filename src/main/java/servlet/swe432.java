@@ -69,7 +69,7 @@ public class swe432 extends HttpServlet {
 		String gym;
 		String experience;
 		String workout;
-		Integer time;
+		Long time;
   }
 
   List<Entry> entries;
@@ -104,7 +104,7 @@ public class swe432 extends HttpServlet {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age, String gym, String experience, String workout, Integer time) throws FileNotFoundException, XMLStreamException {
+    public List<Entry> save(String name, Integer age, String gym, String experience, String workout, Long time) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
@@ -136,7 +136,7 @@ public class swe432 extends HttpServlet {
       return entries;
     }
 
-    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout, Integer time) throws XMLStreamException {
+    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout, Long time) throws XMLStreamException {
         eventWriter.add(ENTRY_START);
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
@@ -213,7 +213,7 @@ public class swe432 extends HttpServlet {
               }
 							if (event.asStartElement().getName().getLocalPart().equals(Data.TIME.name())) {
                   event = eventReader.nextEvent();
-                  entry.time = Integer.parseInt(event.asCharacters().getData());
+                  entry.time = Long.parseInt(event.asCharacters().getData());
                   continue;
               }
           }
@@ -265,7 +265,7 @@ public class swe432 extends HttpServlet {
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
-		 Integer time = session.getLastAccessedTime();
+		 Long time = session.getLastAccessedTime();
 		 String result = "";
 		 if(workout != null) {
 			 if(workout.length == 1)
