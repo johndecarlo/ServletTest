@@ -69,7 +69,7 @@ public class swe432 extends HttpServlet {
 		String gym;
 		String experience;
 		String workout;
-		Date time;
+		Long time;
   }
 
   List<Entry> entries;
@@ -104,7 +104,7 @@ public class swe432 extends HttpServlet {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age, String gym, String experience, String workout, Date time) throws FileNotFoundException, XMLStreamException {
+    public List<Entry> save(String name, Integer age, String gym, String experience, String workout, Long time) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
@@ -136,7 +136,7 @@ public class swe432 extends HttpServlet {
       return entries;
     }
 
-    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout, Date time) throws XMLStreamException {
+    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout, Long time) throws XMLStreamException {
         eventWriter.add(ENTRY_START);
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
@@ -144,7 +144,7 @@ public class swe432 extends HttpServlet {
 				createNode(eventWriter, Data.GYM.name(), gym);
 				createNode(eventWriter, Data.EXPERIENCE.name(), experience);
 				createNode(eventWriter, Data.WORKOUT.name(), workout);
-				createNode(eventWriter, Data.TIME.name(), time.toString());
+				createNode(eventWriter, Data.TIME.name(), String.valueOf(time));
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
     }
@@ -213,7 +213,7 @@ public class swe432 extends HttpServlet {
               }
 							if (event.asStartElement().getName().getLocalPart().equals(Data.TIME.name())) {
                   event = eventReader.nextEvent();
-                  entry.time = new Date(Long.parseLong(event.asCharacters().getData()));
+                  entry.time = Long.parseLong(event.asCharacters().getData());
                   continue;
               }
           }
@@ -243,7 +243,8 @@ public class swe432 extends HttpServlet {
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr style=\"text-align:left;\"><td style=\"border:1px solid white;padding:10px;\">"+entry.time+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.name+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.age+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.gym+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.experience+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.workout+"</td></tr>");
+					Date date = new Date(entry.time)
+         	htmlOut.append("<tr style=\"text-align:left;\"><td style=\"border:1px solid white;padding:10px;\">"+ date.toString() +"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.name+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.age+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.gym+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.experience+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.workout+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
