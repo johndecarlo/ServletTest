@@ -69,7 +69,7 @@ public class swe432 extends HttpServlet {
 		String gym;
 		String experience;
 		String workout;
-		Long time;
+		Date time;
   }
 
   List<Entry> entries;
@@ -112,7 +112,7 @@ public class swe432 extends HttpServlet {
 			newEntry.gym = gym;
 			newEntry.experience = experience;
 			newEntry.workout = workout;
-			newEntry.time = time;
+			newEntry.time = new Date(time);
       entries.add(newEntry);
 
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
