@@ -213,7 +213,7 @@ public class swe432 extends HttpServlet {
               }
 							if (event.asStartElement().getName().getLocalPart().equals(Data.TIME.name())) {
                   event = eventReader.nextEvent();
-                  entry.time = Long.parseInt(event.asCharacters().getData());
+                  entry.time = Long.parseLong(event.asCharacters().getData());
                   continue;
               }
           }
