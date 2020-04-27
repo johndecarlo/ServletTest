@@ -429,7 +429,7 @@ public class swe432 extends HttpServlet {
 			out.println(
 			"<p style=\"color:red; text-align:center;\">Please correct the following and resubmit.</p>"
 				);
-			out.println("<ol style=\"text-align:center;\">");
+			out.println("<ol style=\"text-align:center;color:#FFFFFF;\">");
 			out.println(error);
 			out.println("</ol>");
 		}
