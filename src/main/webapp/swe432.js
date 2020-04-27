@@ -14,12 +14,12 @@ function checkRating (form) {
 }
 
 function checkExercise (form) {
-	if(!(form.workout.checked)) {
+	if(!(form.cardio.checked) && !(form.chest.checked) && !(form.back.checked) && !(form.arms.checked) && !(form.legs.checked) && !(form.core.checked) && !(form.basketball.checked) && !(form.swimming.checked) && !(form.other.checked)) {
 		return false;
 	}
 	return true;
 }
-
+		
 function checkOptions (form) {
 	if(!checkGym(form))
 		alert ("Please select a gym.");

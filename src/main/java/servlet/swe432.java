@@ -246,7 +246,11 @@ public class swe432 extends HttpServlet {
      Integer age = null;
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
-		 String workout = request.getParameter(Data.WORKOUT.name());
+		 List<String> workout = request.getParameterValues(Data.WORKOUT.name());
+		 String result = "";
+		 for(int i = 0; i < workout.size(); i++) {
+			 result += workout.get(i);
+		 }
 		 String error = "";
 
 		 if(name == null) {
@@ -265,7 +269,7 @@ public class swe432 extends HttpServlet {
 				error= "<li>Experience is required</li>";
 				name = "";
 			}
-			if(workout == null) {
+			if(result == "") {
  				error= "<li>Workout is required</li>";
  				name = "";
  			}
