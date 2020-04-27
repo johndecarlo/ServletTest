@@ -243,7 +243,7 @@ public class swe432 extends HttpServlet {
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-					Date date = new Date(entry.time)
+					Date date = new Date(entry.time);
          	htmlOut.append("<tr style=\"text-align:left;\"><td style=\"border:1px solid white;padding:10px;\">"+ date.toString() +"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.name+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.age+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.gym+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.experience+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.workout+"</td></tr>");
       	}
     	}
