@@ -220,12 +220,12 @@ public class swe432 extends HttpServlet {
 
   	public String getAllAsHTMLTable(List<Entry> entries){
     	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align:center;color:#FFFFFF;font-size:125%;margin:auto;\">");
-    	htmlOut.append("<tr><th stlye=\"text-align:left;\">Name</th><th stlye=\"text-align:left;\">Age</th><th stlye=\"text-align:left;\">Gym</th><th stlye=\"text-align:left;\">Experience</th><th stlye=\"text-align:left;\">Workout</th></tr>");
+    	htmlOut.append("<tr class=\"head\"><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr><td stlye=\"text-align:left;\">"+entry.name+"</td><td stlye=\"text-align:left;\">"+entry.age+"</td><td stlye=\"text-align:left;\">"+entry.gym+"</td><td stlye=\"text-align:left;\">"+entry.experience+"</td><td stlye=\"text-align:left;\">"+entry.workout+"</td></tr>");
+         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td><td>"+entry.workout+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
