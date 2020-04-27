@@ -332,7 +332,6 @@ public class swe432 extends HttpServlet {
   }
 
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		response.setContentType("text/html");
 	  PrintWriter out = response.getWriter();
 	  PrintHead(out);
