@@ -248,7 +248,7 @@ public class swe432 extends HttpServlet {
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
 		 String result = "";
-		 if(workout.length > 0) {
+		 if(workout != null) {
 			 if(workout.length == 1)
 					 result = workout[0];
 			 else if(workout.length == 2)
@@ -260,7 +260,7 @@ public class swe432 extends HttpServlet {
 						 else
 							 result += workout[i] + ", ";
 						 }
-			 } 
+			 }
 		 }
 		 String error = "";
 
@@ -278,7 +278,7 @@ public class swe432 extends HttpServlet {
 		 if(experience == null) {
 				error= "<li>Experience is required</li>";
 			}
-			if(result.equals("")) {
+			if(workout == null) {
  				error= "<li>Workout is required</li>";
  			}
 		 else {
