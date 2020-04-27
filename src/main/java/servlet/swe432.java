@@ -220,8 +220,7 @@ public class swe432 extends HttpServlet {
 
   	public String getAllAsHTMLTable(List<Entry> entries){
     	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align:center;color:#FFFFFF;font-size:200%;margin:auto;\">");
-    	htmlOut.append("<tr><th style=\"text-align:left;\">Name</th style=\"text-align:left;\"><th style=\"text-align:left;\">Age
-				</th><th style=\"text-align:left;\">Gym</th><th style=\"text-align:left;\">Experience</th><th style=\"text-align:left;\">Workout</th></tr>");
+    	htmlOut.append("<tr><th style=\"text-align:left;\">Name</th><th style=\"text-align:left;\">Age</th><th style=\"text-align:left;\">Gym</th><th style=\"text-align:left;\">Experience</th><th style=\"text-align:left;\">Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
