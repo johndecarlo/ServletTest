@@ -46,7 +46,7 @@ import javax.servlet.http.*;
 import java.io.*;
 import java.util.Date;
 
-@WebServlet( name = "swe432-assignment-6", urlPatterns = {"/swe432-assignment-6"} )
+@WebServlet( name = "swe432-assignment-8", urlPatterns = {"/swe432-assignment-8"} )
 
 public class swe432 extends HttpServlet {
 
@@ -61,7 +61,7 @@ public class swe432 extends HttpServlet {
 
   static String Domain  = "";
   static String Path    = "/";
-  static String Servlet = "swe432-assignment-6";
+  static String Servlet = "swe432-assignment-8";
 
   public class Entry {
 		String name;
