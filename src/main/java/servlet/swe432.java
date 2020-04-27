@@ -248,17 +248,19 @@ public class swe432 extends HttpServlet {
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
 		 String result = "";
-		 if(workout.length == 1)
-				 result = workout[0];
-		 else if(workout.length == 2)
-				 result = workout[0] + " and " + workout[1];
-		 else {
-				 for(int i = 0; i < workout.length; i++) {
-					 if(i == workout.length - 1)
-						 result += " and " + workout[i];
-					 else
-						 result += workout[i] + ", ";
-					 }
+		 if(workout.length > 0) {
+			 if(workout.length == 1)
+					 result = workout[0];
+			 else if(workout.length == 2)
+					 result = workout[0] + " and " + workout[1];
+			 else {
+					 for(int i = 0; i < workout.length; i++) {
+						 if(i == workout.length - 1)
+							 result += " and " + workout[i];
+						 else
+							 result += workout[i] + ", ";
+						 }
+			 } 
 		 }
 		 String error = "";
 
