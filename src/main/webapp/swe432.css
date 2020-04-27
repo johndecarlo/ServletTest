@@ -8,5 +8,3 @@ table.gym_images {background-color:#009900;height: 200;width: 900;margin: auto;}
 table.user_input {background-color:#009900;height: 100;width: 700;min-width: 700;margin: auto;}
 td.gym_time, td.exercise_type {background-color:#FFEF33;font-family: Verdana, sans-serif;font-size: 90%;text-align: center;}
 td.gym_type {background-color:#FFEF33;font-family: Verdana, sans-serif;font-size: 90%;text-align: left;}
-tr.head th {color: #ffffff;background-color: #90b4d6;border-bottom: 2px solid #547ca0;border-right: 1px solid #749abe;border-top: 1px solid #90b4d6;text-align: center;text-shadow: -1px -1px 1px #666666; letter-spacing: 0.15em;}
-th, td {text-align: left; background-color: #e0e9f0; border-top:	1px solid #flf8fe; border-bottom: 1px solid #cbd2d8; border-right: 1px solid #cbd2d8;}

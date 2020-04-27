@@ -220,12 +220,12 @@ public class swe432 extends HttpServlet {
 
   	public String getAllAsHTMLTable(List<Entry> entries){
     	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align:center;color:#FFFFFF;font-size:125%;margin:auto;\">");
-    	htmlOut.append("<tr class=\"head\"><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
+    	htmlOut.append("<tr style=\"text-align:left;\"><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td><td>"+entry.workout+"</td></tr>");
+         	htmlOut.append("<tr style=\"text-align:left;\"><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td><td>"+entry.workout+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
@@ -332,6 +332,7 @@ public class swe432 extends HttpServlet {
   }
 
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		response.setContentType("text/html");
 	  PrintWriter out = response.getWriter();
 	  PrintHead(out);
