@@ -38,6 +38,14 @@ import javax.xml.stream.events.StartDocument;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+// Import Servlet Libraries
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+// Import Java Libraries
+import java.io.*;
+import java.util.Date;
+
 @WebServlet( name = "swe432-assignment-6", urlPatterns = {"/swe432-assignment-6"} )
 
 public class swe432 extends HttpServlet {
@@ -45,20 +53,23 @@ public class swe432 extends HttpServlet {
 	static String Style = "swe432.css";
 	//static String jscript = "swe432.js";
 
-	static enum Data {NAME, AGE, GYM, EXPERIENCE, WORKOUT, ENTRY, ENTRIES};
+	static enum Data {NAME, AGE, GYM, EXPERIENCE, WORKOUT, TIME, ENTRY, ENTRIES};
 
   static String RESOURCE_FILE = "entries.xml";
+	static HttpSession session;
+
 
   static String Domain  = "";
   static String Path    = "/";
   static String Servlet = "swe432-assignment-6";
 
   public class Entry {
-    String name;
+		String name;
     Integer age;
 		String gym;
 		String experience;
 		String workout;
+		Integer time;
   }
 
   List<Entry> entries;
@@ -93,7 +104,7 @@ public class swe432 extends HttpServlet {
       this.filePath = filePath;
     }
 
-    public List<Entry> save(String name, Integer age, String gym, String experience, String workout) throws FileNotFoundException, XMLStreamException {
+    public List<Entry> save(String name, Integer age, String gym, String experience, String workout, Integer time) throws FileNotFoundException, XMLStreamException {
       List<Entry> entries = getAll();
       Entry newEntry = new Entry();
       newEntry.name = name;
@@ -101,6 +112,7 @@ public class swe432 extends HttpServlet {
 			newEntry.gym = gym;
 			newEntry.experience = experience;
 			newEntry.workout = workout;
+			newEntry.time = time;
       entries.add(newEntry);
 
       XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -113,7 +125,7 @@ public class swe432 extends HttpServlet {
       eventWriter.add(LINE_END);
 
       for(Entry entry: entries) {
-        addEntry(eventWriter, entry.name, entry.age, entry.gym, entry.experience, entry.workout);
+        addEntry(eventWriter, entry.name, entry.age, entry.gym, entry.experience, entry.workout, entry.time);
       }
 
       eventWriter.add(ENTRIES_END);
@@ -124,7 +136,7 @@ public class swe432 extends HttpServlet {
       return entries;
     }
 
-    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout) throws XMLStreamException {
+    private void addEntry(XMLEventWriter eventWriter, String name, Integer age, String gym, String experience, String workout, Integer time) throws XMLStreamException {
         eventWriter.add(ENTRY_START);
         eventWriter.add(LINE_END);
         createNode(eventWriter, Data.NAME.name(), name);
@@ -132,6 +144,7 @@ public class swe432 extends HttpServlet {
 				createNode(eventWriter, Data.GYM.name(), gym);
 				createNode(eventWriter, Data.EXPERIENCE.name(), experience);
 				createNode(eventWriter, Data.WORKOUT.name(), workout);
+				createNode(eventWriter, Data.TIME.name(), String.valueOf(time));
         eventWriter.add(ENTRY_END);
         eventWriter.add(LINE_END);
     }
@@ -198,6 +211,11 @@ public class swe432 extends HttpServlet {
                   entry.workout = event.asCharacters().getData();
                   continue;
               }
+							if (event.asStartElement().getName().getLocalPart().equals(Data.TIME.name())) {
+                  event = eventReader.nextEvent();
+                  entry.time = Integer.parseInt(event.asCharacters().getData());
+                  continue;
+              }
           }
           if (event.isEndElement()) {
               EndElement endElement = event.asEndElement();
@@ -220,12 +238,12 @@ public class swe432 extends HttpServlet {
 
   	public String getAllAsHTMLTable(List<Entry> entries){
     	StringBuilder htmlOut = new StringBuilder("<table style=\"border:1px solid white;text-align:center;color:#FFFFFF;font-size:125%;margin:auto;\">");
-    	htmlOut.append("<tr style=\"text-align:left;\"><th style=\"border:1px solid white;padding:10px;\">Name</th><th style=\"border:1px solid white;padding:10px;\">Age</th><th style=\"border:1px solid white;padding:10px;\">Gym</th><th style=\"border:1px solid white;padding:10px;\">Experience</th><th style=\"border:1px solid white;padding:10px;\">Workout</th></tr>");
+    	htmlOut.append("<tr style=\"text-align:left;\"><th style=\"border:1px solid white;padding:10px;\">Time Submitted</th><th style=\"border:1px solid white;padding:10px;\">Name</th><th style=\"border:1px solid white;padding:10px;\">Age</th><th style=\"border:1px solid white;padding:10px;\">Gym</th><th style=\"border:1px solid white;padding:10px;\">Experience</th><th style=\"border:1px solid white;padding:10px;\">Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr style=\"text-align:left;\"><td style=\"border:1px solid white;padding:10px;\">"+entry.name+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.age+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.gym+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.experience+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.workout+"</td></tr>");
+         	htmlOut.append("<tr style=\"text-align:left;\"><td style=\"border:1px solid white;padding:10px;\">"+entry.time+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.name+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.age+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.gym+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.experience+"</td><td style=\"border:1px solid white;padding:10px;\">"+entry.workout+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
@@ -247,6 +265,8 @@ public class swe432 extends HttpServlet {
 		 String gym = request.getParameter(Data.GYM.name());
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
+		 String rawTime = session.getLastAccessedTime();
+		 Integer time = null;
 		 String result = "";
 		 if(workout != null) {
 			 if(workout.length == 1)
@@ -307,7 +327,7 @@ public class swe432 extends HttpServlet {
        entryManager.setFilePath(RESOURCE_FILE);
        List<Entry> newEntries= null;
        try{
-         newEntries=entryManager.save(name, age, gym, experience, result);
+         newEntries=entryManager.save(name, age, gym, experience, result, time);
        }catch(FileNotFoundException e){
          e.printStackTrace();
           error+= "<li style=\"text-align:center;color:white;\">Could not save entry.</li>";
@@ -332,6 +352,7 @@ public class swe432 extends HttpServlet {
   }
 
 	public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		session = request.getSession();
 		response.setContentType("text/html");
 	  PrintWriter out = response.getWriter();
 	  PrintHead(out);
