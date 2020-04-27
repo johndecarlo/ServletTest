@@ -219,7 +219,7 @@ public class swe432 extends HttpServlet {
     }
 
   	public String getAllAsHTMLTable(List<Entry> entries){
-    	StringBuilder htmlOut = new StringBuilder("<table class = \"result\">");
+    	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align: center; color:#FFFFFF; font-size: 200%;\">");
     	htmlOut.append("<tr><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
@@ -273,13 +273,13 @@ public class swe432 extends HttpServlet {
        rawAge = "";
      }
 		 if(gym == null) {
-				error= "<li class=\"error\">Gym is required</li>";
+				error= "<li>Gym is required</li>";
 			}
 		 if(experience == null) {
-				error= "<li class=\"error\">Experience is required</li>";
+				error= "<li>Experience is required</li>";
 			}
 			if(workout == null) {
- 				error= "<li class=\"error\">Workout is required</li>";
+ 				error= "<li>Workout is required</li>";
  			}
 		 else {
           try{
@@ -426,11 +426,11 @@ public class swe432 extends HttpServlet {
 			out.println(
 			"<p style=\"color:red; text-align:center;\">Please correct the following and resubmit.</p>"
 				);
-			out.println("<ol>");
+			out.println("<ol style=\"text-align:center;\">");
 			out.println(error);
 			out.println("</ol>");
 		}
-		out.println("<p style=\"text-align:center\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
+		out.println("<p style=\"text-align:center;\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
 		out.println("</body>");
 	}
