@@ -219,7 +219,7 @@ public class swe432 extends HttpServlet {
     }
 
   	public String getAllAsHTMLTable(List<Entry> entries){
-    	StringBuilder htmlOut = new StringBuilder("<table class = \"user_input\">");
+    	StringBuilder htmlOut = new StringBuilder("<table class = \"result\">");
     	htmlOut.append("<tr><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
@@ -248,8 +248,17 @@ public class swe432 extends HttpServlet {
 		 String experience = request.getParameter(Data.EXPERIENCE.name());
 		 String[] workout = request.getParameterValues(Data.WORKOUT.name());
 		 String result = "";
-		 for(int i = 0; i < workout.length; i++) {
-			 result += workout[i];
+		 if(workout.length == 1)
+				 result = workout[0];
+		 else if(workout.length == 2)
+				 result = workout[0] + " and " + workout[1];
+		 else {
+				 for(int i = 0; i < workout.length; i++) {
+					 if(i == workout.length - 1)
+						 result += " and " + workout[i];
+					 else
+						 result += workout[i] + ", ";
+					 }
 		 }
 		 String error = "";
 
@@ -368,9 +377,9 @@ public class swe432 extends HttpServlet {
 		out.println(" action=\""+Domain+Path+Servlet+"\">");
 		out.println("<table class = \"user_input\">");
 		out.println("<tr>");
-		out.println("<td>Name:</td>");
+		out.println("<td style=\"color:#000000\">Name:</td>");
 		out.println("<td><input type=\"text\" name=\""+Data.NAME.name()+"\" value=\""+name+"\" size=30 required></td>");
-		out.println("<td>Age:</td>");
+		out.println("<td style=\"color:#000000\">Age:</td>");
 		out.println("<td><input type=\"text\" name=\""+Data.AGE.name()+"\" oninput=\"this.value=this.value.replace(/[^0-9]/g,'');\" value=\""+age+"\" size=3 required></td>");
 		out.println("</table>");
 		out.println("<table class=\"user_input\" cellspacing=5>");
@@ -418,7 +427,7 @@ public class swe432 extends HttpServlet {
 			out.println(
 			"<p style=\"color:red; text-align:center;\">Please correct the following and resubmit.</p>"
 				);
-			out.println("<ol>");
+			out.println("<ol class=\"error\">");
 			out.println(error);
 			out.println("</ol>");
 		}
