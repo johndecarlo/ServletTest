@@ -220,14 +220,12 @@ public class swe432 extends HttpServlet {
 
   	public String getAllAsHTMLTable(List<Entry> entries){
     	StringBuilder htmlOut = new StringBuilder("<table style=\"text-align:center;color:#FFFFFF;font-size:200%;margin:auto;\">");
-    	htmlOut.append("<tr><th style=\"text-align:left;\">Name</th><th style=\"text-align:left;\">Age</th><th style=\"text-align:left;\">Gym</th><th style=\"text-align:left;\">Experience</th><th style=\"text-align:left;\">Workout</th></tr>");
+    	htmlOut.append("<tr><th>Name</th><th>Age</th><th>Gym</th><th>Experience</th><th>Workout</th></tr>");
     	if(entries == null || entries.size() == 0){
       	htmlOut.append("<tr><td>No entries yet.</td></tr>");
     	} else {
       	for(Entry entry: entries){
-         	htmlOut.append("<tr><td style=\"text-align:left;\">"+entry.name+"</td><td style=\"text-align:left;\">"+entry.age+
-						"</td><td style=\"text-align:left;\">"+entry.gym+"</td><td style=\"text-align:left;\">"+entry.experience+
-							"</td><td style=\"text-align:left;\">"+entry.workout+"</td></tr>");
+         	htmlOut.append("<tr><td>"+entry.name+"</td><td>"+entry.age+"</td><td>"+entry.gym+"</td><td>"+entry.experience+"</td><td>"+entry.workout+"</td></tr>");
       	}
     	}
     	htmlOut.append("</table>");
@@ -428,11 +426,11 @@ public class swe432 extends HttpServlet {
 			out.println(
 			"<p style=\"color:red; text-align:center;\">Please correct the following and resubmit.</p>"
 				);
-			out.println("<ol style=\"text-align:center;color:#FFFFFF;\">");
+			out.println("<ol style=\"text-align:center;\">");
 			out.println(error);
 			out.println("</ol>");
 		}
-		out.println("<p style=\"text-align:center;\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
+		out.println("<p style=\"text-align:center;color:white;\"><input type=\"submit\" value=\"Submit\" name=\"Operation\" onClick=\"checkOptions(form)\"></p>");
 		out.println("</form>");
 		out.println("</body>");
 	}
