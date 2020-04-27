@@ -272,15 +272,12 @@ public class swe432 extends HttpServlet {
      }
 		 if(gym == null) {
 				error= "<li>Gym is required</li>";
-				name = "";
 			}
 		 if(experience == null) {
 				error= "<li>Experience is required</li>";
-				name = "";
 			}
-			if(result == "") {
+			if(result.equals("")) {
  				error= "<li>Workout is required</li>";
- 				name = "";
  			}
 		 else {
           try{
