@@ -31,13 +31,13 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
    String expression = request.getParameter("EXP");
    String operation = request.getParameter("Operation");
 
-   values = expression.split("OR|AND|&|&&|or|and");
+   values = expression.split("OR|AND|&|&&|or|and|\\||\\|\\|");
 
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
    PrintHead(out);
    out.println("<body>");
-   if(!expression.contains("OR") && !expression.contains("AND")) {
+   if(!expression.contains("OR") && !expression.contains("AND") && !expression.contains("or") && !expression.contains("and") && !expression.contains("&") && !expression.contains("&&") && !expression.contains("|") && !expression.contains("||")) {
      out.println("<p align=\"center\">The Expression you submitted was not valid</p>");
    } else {
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
