@@ -31,11 +31,11 @@ public void printTruthTable(HttpServletRequest request, HttpServletResponse resp
   PrintWriter out = response.getWriter();
   if (index == N) {
     out.println("<p>");
-     for(i=0; i<N; i++)
+     for(int i=0; i<N; i++)
         out.println(truthVals[i] + " ");
      out.println("</p><br><br>");
   } else {
-     for (i=0; i<2; i++) {
+     for (int i=0; i<2; i++) {
         truthVals[index] = i;
         printTruthTable(request, response, N, index + 1, truthVals);
      }
