@@ -86,7 +86,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
    String[] values;
    String operation = request.getParameter("Operation");
    String expression = request.getParameter("EXP");
-   values = expression.split("XOR|xor|OR|AND|&|&&|or|and|\\||\\|\\|");
+   values = expression.split("XOR|xor|OR|AND|&&|&|or|and|\\|\\||\\|");
    for(int i = 0; i < values.length; i++) {
      values[i] = values[i].replaceAll("\\s", "");
    }
