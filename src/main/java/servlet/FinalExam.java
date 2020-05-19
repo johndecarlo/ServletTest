@@ -65,8 +65,9 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<table align=\"center\">");
      out.println("<tr>");
      for(int i = 0; i < values.length; i++) {
-       out.println("<th>" + values[i] + "</th>")
+       out.println("<th>" + values[i] + "</th>");
      }
+     out.println("<th>Result</th>");
      out.println("</tr>");
      printTruthTable(request, response, values.length, 0, nums);
      out.println("</table>");
