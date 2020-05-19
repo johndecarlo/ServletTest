@@ -26,16 +26,18 @@ static String OperationSubmit = "Submit";
  *  indicated by the submit button, and sends the results
  *  back to the client.
 ********************************************************* */
-public void printTruthTable(int N, int index, int[] truthVals) {
+public void printTruthTable(HttpServletRequest request, HttpServletResponse response, int N, int index, int[] truthVals) throws ServletException, IOException {
+  response.setContentType("text/html");
+  PrintWriter out = response.getWriter();
   if (index == N) {
     out.println("<p>");
      for(i=0; i<N; i++)
-        out.print(truthVals[i] + " ");
+        out.println(truthVals[i] + " ");
      out.println("</p><br><br>");
   } else {
      for (i=0; i<2; i++) {
         truthVals[index] = i;
-        printTruthTable(N, index + 1, truthVals);
+        printTruthTable(request, response, N, index + 1, truthVals);
      }
   }
 }
