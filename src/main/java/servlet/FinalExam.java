@@ -37,7 +37,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
    PrintWriter out = response.getWriter();
    PrintHead(out);
    out.println("<body>");
-   if(!expression.contains("OR") && !expression.contains("AND") && !expression.contains("&") && !expression.contains("&&") && !expression.contains("|") && !expression.contains("||") && !expression.contains("or") && !expression.contains("and")) {
+   if(!expression.contains("OR") && !expression.contains("AND")) {
      out.println("<p align=\"center\">The Expression you submitted was not valid</p>");
    } else {
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
