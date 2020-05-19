@@ -30,10 +30,14 @@ public void printTruthTable(HttpServletRequest request, HttpServletResponse resp
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
   if (index == N) {
-    out.println("<p>");
-     for(int i=0; i<N; i++)
-        out.println(truthVals[i] + " ");
-     out.println("</p><br><br>");
+    out.println("<tr>");
+     for(int i=0; i<N; i++) {
+        if(truthVals[i] == 0)
+          out.println("<td>F");
+        else
+          out.println("<td>T");
+     }
+     out.println("</tr>");
   } else {
      for (int i=0; i<2; i++) {
         truthVals[index] = i;
@@ -58,7 +62,14 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
    } else {
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
      int[] nums = new int[values.length];
+     out.println("<table align=\"center\">");
+     out.println("<tr>");
+     for(int i = 0; i < values.length; i++) {
+       out.println("<th>" + values[i] + "</th>")
+     }
+     out.println("</tr>");
      printTruthTable(request, response, values.length, 0, nums);
+     out.println("</table>");
    }
    out.println("</body>");
    PrintTail(out);
