@@ -33,7 +33,7 @@ public void printTruthTable(HttpServletRequest request, HttpServletResponse resp
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
   if (index == N) {
-    out.println("<tr>");
+    out.println("<tr style=\"text-align:left;>");
      for(int i=0; i<N; i++) {
         if(operation.equals("Submit")) {
           if(values[i].equals("TRUE") || values[i].equals("true"))
@@ -102,14 +102,14 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<p align=\"center\">Expression: " + expression +"</p>");
      int[] nums = new int[values.length];
      out.println("<table style=\"border:1px solid black;text-align:center;font-size:125%;margin:auto;\">");
-     out.println("<tr>");
+     out.println("<tr style=\"text-align:left;>");
      for(int i = 0; i < values.length; i++) {
        out.println("<th>" + values[i] + "</th>");
      }
      out.println("<th>Result</th>");
      out.println("</tr>");
      printTruthTable(request, response, values.length, 0, nums, operation, values);
-     out.println("</table>");
+     out.println("</table><br><br>");
    }
    out.println("<form align=\"center\" method=\"post\">");
    out.println("<input type=\"submit\" value=\"" + textOpt1 + "\" name=\"Operation\">");
