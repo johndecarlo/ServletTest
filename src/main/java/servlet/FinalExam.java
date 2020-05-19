@@ -27,12 +27,11 @@ static String OperationSubmit = "Submit";
  *  back to the client.
 ********************************************************* */
 public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+   String[] values;
    String expression = request.getParameter("EXP");
    String operation = request.getParameter("Operation");
 
-   if(expression.contains("&")) {
-     String[] values = expression.split("&");
-   }
+   values = expression.split("&");
 
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
