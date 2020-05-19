@@ -21,23 +21,10 @@ static String Servlet = "final-exam";
 static String OperationSubmit = "Submit";
 
 /** *****************************************************
-* A recursive algorithm to print a truth table of 1s and 0s.
-* N is the number of clauses, or columns, in the truth table.
-* index should be zero on the first call
-* truthVals starts as an empty array of integers of size N
-printTruthTable(integer N, integer index, integer array truthVals) {
-   if (index == N) {
-      for (i=0; i<N; i++)
-         print(truthVals[i] + " ");
-      print(newline);
-   } else {
-      for (i=0; i<2; i++) {
-         truthVals[index] = i;
-         printTruthTable(N, index + 1, truthVals);
-      }
-   }
-}
-
+ *  Overrides HttpServlet's doPost().
+ *  Converts the values in the form, performs the operation
+ *  indicated by the submit button, and sends the results
+ *  back to the client.
 ********************************************************* */
 public void printTruthTable(int N, int index, int[] truthVals) {
   if (index == N) {
@@ -68,29 +55,38 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<p align=\"center\">The Expression you submitted was not valid</p>");
    } else {
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
-     int[] values = new int[values.length];
-     printTruthTable(values.length, 0, );
    }
    out.println("</body>");
    PrintTail(out);
 }  // End doPost
 
+/** *****************************************************
+ *  Overrides HttpServlet's doGet().
+ *  Prints an HTML page with a blank form.
+********************************************************* */
 public void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
    PrintHead(out);
    PrintBody(out);
    PrintTail(out);
-}
+} // End doGet
 
+/** *****************************************************
+ *  Prints the <head> of the HTML page, no <body>.
+********************************************************* */
 private void PrintHead (PrintWriter out) {
    out.println("<html>");
    out.println("<head>");
    out.println("<title>Final Exam</title>");
    out.println("</head>");
    out.println("");
-}
+} // End PrintHead
 
+/** *****************************************************
+ *  Prints the <BODY> of the HTML page with the form data
+ *  values from the parameters.
+********************************************************* */
 private void PrintBody (PrintWriter out, String expression) {
    out.println("<body>");
    out.println("<h1 align=\"center\">SWE 432: Final Exam</h1>");
@@ -101,8 +97,12 @@ private void PrintBody (PrintWriter out, String expression) {
 	 out.println("<input type=\"submit\" value=\"" + OperationSubmit + "\" name=\"Operation\">");
 	 out.println("</form>");
    out.println("</body>");
-}
+} // End PrintBody
 
+/** *****************************************************
+ *  Overloads PrintBody (out,lhs,rhs,rslt) to print a page
+ *  with blanks in the form fields.
+********************************************************* */
 private void PrintBody (PrintWriter out) {
    PrintBody(out, "");
 }
