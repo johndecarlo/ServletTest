@@ -33,7 +33,7 @@ public void printTruthTable(HttpServletRequest request, HttpServletResponse resp
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
   if (index == N) {
-    out.println("<tr style=\"border:1px solid black;padding:10px;>");
+    out.println("<tr style=\"text-align:left;>");
      for(int i=0; i<N; i++) {
         if(operation.equals("Submit")) {
           if(values[i].equals("TRUE") || values[i].equals("true"))
@@ -102,7 +102,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<p align=\"center\">Expression: " + expression +"</p>");
      int[] nums = new int[values.length];
      out.println("<table style=\"border:1px solid black;text-align:center;font-size:125%;margin:auto;\">");
-     out.println("<tr style=\"border:1px solid black;padding:10px;>");
+     out.println("<tr style=style=\"text-align:left>");
      for(int i = 0; i < values.length; i++) {
        out.println("<th style=\"border:1px solid black;padding:10px;>" + values[i] + "</th>");
      }
