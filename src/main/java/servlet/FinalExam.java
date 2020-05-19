@@ -35,6 +35,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
    PrintHead(out);
    out.println("<body>");
 	 out.println("<p align=\"center\">Your Expression has been submitted</p>");
+   out.println("<p align=\"center\">" + expression + "</p>");
    out.println("</body>");
    PrintTail(out);
 }  // End doPost
@@ -72,7 +73,7 @@ private void PrintBody (PrintWriter out, String expression) {
 	 out.println("<p align=\"center\">Enter your truth table in the text box below</p>");
 	 out.println("<form align=\"center\" method=\"post\">");
 	 out.println("<label for=\"EXP\">Expression:</label>");
-	 out.println("<input type=\"text\" name=\"EXP\" value = value=\"" + expression + "\"><br>");
+	 out.println("<input type=\"text\" name=\"EXP\" value = \"" + expression + "\"><br>");
 	 out.println("<input type=\"submit\" value=\"" + OperationSubmit + "\" name=\"Operation\">");
 	 out.println("</form>");
    out.println("</body>");
