@@ -29,29 +29,45 @@ static String textOpt3 = "text3";
  *  indicated by the submit button, and sends the results
  *  back to the client.
 ********************************************************* */
-public void printTruthTable(HttpServletRequest request, HttpServletResponse response, int N, int index, int[] truthVals, String operation) throws ServletException, IOException {
+public void printTruthTable(HttpServletRequest request, HttpServletResponse response, int N, int index, int[] truthVals, String operation, String[] values) throws ServletException, IOException {
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
   if (index == N) {
     out.println("<tr>");
      for(int i=0; i<N; i++) {
         if(operation.equals("Submit")) {
-          if(truthVals[i] == 0)
+          if(values[i].equals("TRUE") || values[i].equals("true"))
+            out.println("<td>T");
+          else if(values[i].equals("FALSE") || values[i].equals("false"))
+            out.println("<td>F");
+          else if(truthVals[i] == 0)
             out.println("<td>F");
           else
             out.println("<td>T");
         } else if(operation.equals("text1")) {
-          if(truthVals[i] == 0)
+          if(values[i].equals("TRUE") || values[i].equals("true"))
+            out.println("<td>TRUE");
+          else if(values[i].equals("FALSE") || values[i].equals("false"))
+            out.println("<td>FALSE");
+          else if(truthVals[i] == 0)
             out.println("<td>FALSE");
           else
             out.println("<td>TRUE");
         } else if(operation.equals("text2")) {
-          if(truthVals[i] == 0)
+          if(values[i].equals("TRUE") || values[i].equals("true"))
+            out.println("<td>1");
+          else if(values[i].equals("FALSE") || values[i].equals("false"))
+            out.println("<td>0");
+          else if(truthVals[i] == 0)
             out.println("<td>0");
           else
             out.println("<td>1");
         } else {
-          if(truthVals[i] == 0)
+          if(values[i].equals("TRUE") || values[i].equals("true"))
+            out.println("<td>true");
+          else if(values[i].equals("FALSE") || values[i].equals("false"))
+            out.println("<td>false");
+          else if(truthVals[i] == 0)
             out.println("<td>false");
           else
             out.println("<td>true");
@@ -61,23 +77,23 @@ public void printTruthTable(HttpServletRequest request, HttpServletResponse resp
   } else {
      for (int i=0; i<2; i++) {
         truthVals[index] = i;
-        printTruthTable(request, response, N, index + 1, truthVals, operation);
+        printTruthTable(request, response, N, index + 1, truthVals, operation, values);
      }
   }
 }
 
 public void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
    String[] values;
-   String expression = request.getParameter("EXP");
    String operation = request.getParameter("Operation");
+   String expression = request.getParameter("EXP");
 
-   values = expression.split("OR|AND|&|&&|or|and|\\||\\|\\|");
+   values = expression.split("OR|AND|&|&&|or|and|\\||\\|\\|XOR|xor");
 
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
    PrintHead(out);
    out.println("<body>");
-   if(!expression.contains("OR") && !expression.contains("AND") && !expression.contains("or") && !expression.contains("and") && !expression.contains("&") && !expression.contains("&&") && !expression.contains("|") && !expression.contains("||")) {
+   if(!expression.contains("OR") && !expression.contains("AND") && !expression.contains("or") && !expression.contains("and") && !expression.contains("&") && !expression.contains("&&") && !expression.contains("|") && !expression.contains("||") && !expression.contains("XOR") && !expression.contains("xor")) {
      out.println("<p align=\"center\">The Expression you submitted was not valid</p>");
    } else {
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
@@ -90,7 +106,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      }
      out.println("<th>Result</th>");
      out.println("</tr>");
-     printTruthTable(request, response, values.length, 0, nums, operation);
+     printTruthTable(request, response, values.length, 0, nums, operation, values);
      out.println("</table>");
    }
    out.println("<form align=\"center\" method=\"post\">");
