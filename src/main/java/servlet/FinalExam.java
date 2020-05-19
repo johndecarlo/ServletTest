@@ -57,6 +57,8 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<p align=\"center\">The Expression you submitted was not valid</p>");
    } else {
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
+     int[] nums = new int[values.length];
+     printTruthTable(request, response, values.length, 0, nums);
    }
    out.println("</body>");
    PrintTail(out);
