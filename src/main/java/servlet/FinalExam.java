@@ -31,7 +31,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
    String expression = request.getParameter("EXP");
    String operation = request.getParameter("Operation");
 
-   values = expression.split("OR\\AND\\&\\&&\\|\\||\\and\\or");
+   values = expression.split("OR|AND|&|&&|or|and");
 
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
