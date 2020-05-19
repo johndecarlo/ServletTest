@@ -35,17 +35,17 @@ public void printTruthTable(HttpServletRequest request, HttpServletResponse resp
   if (index == N) {
     out.println("<tr>");
      for(int i=0; i<N; i++) {
-        if(operatin.equals("Submit")){
+        if(operation.equals("Submit")) {
           if(truthVals[i] == 0)
             out.println("<td>F");
           else
             out.println("<td>T");
-        } else if(operatin.equals("text1")){
+        } else if(operation.equals("text1")) {
           if(truthVals[i] == 0)
             out.println("<td>FALSE");
           else
             out.println("<td>TRUE");
-        } else if(operatin.equals("text2")){
+        } else if(operation.equals("text2")) {
           if(truthVals[i] == 0)
             out.println("<td>0");
           else
