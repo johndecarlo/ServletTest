@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 
 @WebServlet( name = "final-exam", urlPatterns = {"/final-exam"} )
 
-public class twoButtons extends HttpServlet
+public class FinalExam extends HttpServlet
 {
 
 // Location of servlet.
