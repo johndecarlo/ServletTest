@@ -19,6 +19,9 @@ static String Servlet = "final-exam";
 
 // Button labels
 static String OperationSubmit = "Submit";
+static String textOpt1 = "text1";
+static String textOpt2 = "text2";
+static String textOpt3 = "text3";
 
 /** *****************************************************
  *  Overrides HttpServlet's doPost().
@@ -26,22 +29,39 @@ static String OperationSubmit = "Submit";
  *  indicated by the submit button, and sends the results
  *  back to the client.
 ********************************************************* */
-public void printTruthTable(HttpServletRequest request, HttpServletResponse response, int N, int index, int[] truthVals) throws ServletException, IOException {
+public void printTruthTable(HttpServletRequest request, HttpServletResponse response, int N, int index, int[] truthVals, String operation) throws ServletException, IOException {
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
   if (index == N) {
     out.println("<tr>");
      for(int i=0; i<N; i++) {
-        if(truthVals[i] == 0)
-          out.println("<td>F");
-        else
-          out.println("<td>T");
+        if(operatin.equals("Submit")){
+          if(truthVals[i] == 0)
+            out.println("<td>F");
+          else
+            out.println("<td>T");
+        } else if(operatin.equals("text1")){
+          if(truthVals[i] == 0)
+            out.println("<td>FALSE");
+          else
+            out.println("<td>TRUE");
+        } else if(operatin.equals("text2")){
+          if(truthVals[i] == 0)
+            out.println("<td>0");
+          else
+            out.println("<td>1");
+        } else {
+          if(truthVals[i] == 0)
+            out.println("<td>false");
+          else
+            out.println("<td>true");
+        }
      }
      out.println("</tr>");
   } else {
      for (int i=0; i<2; i++) {
         truthVals[index] = i;
-        printTruthTable(request, response, N, index + 1, truthVals);
+        printTruthTable(request, response, N, index + 1, truthVals, operation);
      }
   }
 }
@@ -61,6 +81,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<p align=\"center\">The Expression you submitted was not valid</p>");
    } else {
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
+     out.println("<p align=\"center\">Expression: " + expression +"</p>");
      int[] nums = new int[values.length];
      out.println("<table align=\"center\">");
      out.println("<tr>");
@@ -69,9 +90,14 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      }
      out.println("<th>Result</th>");
      out.println("</tr>");
-     printTruthTable(request, response, values.length, 0, nums);
+     printTruthTable(request, response, values.length, 0, nums, operation);
      out.println("</table>");
    }
+   out.println("<form align=\"center\" method=\"post\">");
+   out.println("<input type=\"submit\" value=\"" + textOpt1 + "\" name=\"Operation\">");
+   out.println("<input type=\"submit\" value=\"" + textOpt2 + "\" name=\"Operation\">");
+   out.println("<input type=\"submit\" value=\"" + textOpt3 + "\" name=\"Operation\">");
+	 out.println("</form>");
    out.println("</body>");
    PrintTail(out);
 }  // End doPost
