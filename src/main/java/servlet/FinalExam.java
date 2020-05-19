@@ -101,7 +101,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<p align=\"center\">Your Expression has been submitted</p>");
      out.println("<p align=\"center\">Expression: " + expression +"</p>");
      int[] nums = new int[values.length];
-     out.println("<table align=\"center\">");
+     out.println("<table align=\"center\" style=\"border:1px;text-align:center;\">");
      out.println("<tr>");
      for(int i = 0; i < values.length; i++) {
        out.println("<th>" + values[i] + "</th>");
