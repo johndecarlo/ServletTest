@@ -33,44 +33,44 @@ public void printTruthTable(HttpServletRequest request, HttpServletResponse resp
   response.setContentType("text/html");
   PrintWriter out = response.getWriter();
   if (index == N) {
-    out.println("<tr style=\"text-align:left;>");
+    out.println("<tr>");
      for(int i=0; i<N; i++) {
         if(operation.equals("Submit")) {
           if(values[i].equals("TRUE") || values[i].equals("true"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>T");
+            out.println("<td>T");
           else if(values[i].equals("FALSE") || values[i].equals("false"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>F");
+            out.println("<td>F");
           else if(truthVals[i] == 0)
-            out.println("<td style=\"border:1px solid black;padding:10px;>F");
+            out.println("<td>F");
           else
-            out.println("<td style=\"border:1px solid black;padding:10px;>T");
+            out.println("<td>T");
         } else if(operation.equals("text1")) {
           if(values[i].equals("TRUE") || values[i].equals("true"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>TRUE");
+            out.println("<td>TRUE");
           else if(values[i].equals("FALSE") || values[i].equals("false"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>FALSE");
+            out.println("<td>FALSE");
           else if(truthVals[i] == 0)
-            out.println("<td style=\"border:1px solid black;padding:10px;>FALSE");
+            out.println("<td>FALSE");
           else
-            out.println("<td style=\"border:1px solid black;padding:10px;>TRUE");
+            out.println("<td>TRUE");
         } else if(operation.equals("text2")) {
           if(values[i].equals("TRUE") || values[i].equals("true"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>1");
+            out.println("<td>1");
           else if(values[i].equals("FALSE") || values[i].equals("false"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>0");
+            out.println("<td>0");
           else if(truthVals[i] == 0)
-            out.println("<td style=\"border:1px solid black;padding:10px;>0");
+            out.println("<td>0");
           else
-            out.println("<td style=\"border:1px solid black;padding:10px;>1");
+            out.println("<td>1");
         } else {
           if(values[i].equals("TRUE") || values[i].equals("true"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>true");
+            out.println("<td>true");
           else if(values[i].equals("FALSE") || values[i].equals("false"))
-            out.println("<td style=\"border:1px solid black;padding:10px;>false");
+            out.println("<td>false");
           else if(truthVals[i] == 0)
-            out.println("<td style=\"border:1px solid black;padding:10px;>false");
+            out.println("<td>false");
           else
-            out.println("<td style=\"border:1px solid black;padding:10px;>true");
+            out.println("<td>true");
         }
      }
      out.println("</tr>");
@@ -102,11 +102,11 @@ public void doPost (HttpServletRequest request, HttpServletResponse response) th
      out.println("<p align=\"center\">Expression: " + expression +"</p>");
      int[] nums = new int[values.length];
      out.println("<table style=\"border:1px solid black;text-align:center;font-size:125%;margin:auto;\">");
-     out.println("<tr style=\"text-align:left>");
+     out.println("<tr>");
      for(int i = 0; i < values.length; i++) {
-       out.println("<th style=\"border:1px solid black;padding:10px;>" + values[i] + "</th>");
+       out.println("<th>" + values[i] + "</th>");
      }
-     out.println("<th style=\"border:1px solid black;padding:10px;>Result</th>");
+     out.println("<th>Result</th>");
      out.println("</tr>");
      printTruthTable(request, response, values.length, 0, nums, operation, values);
      out.println("</table>");
